@@ -1,0 +1,5 @@
+SELECT * FROM "Roles"
+SELECT * FROM "Status"
+SELECT * FROM "Teams"
+SELECT * FROM "Workers"
+SELECT * FROM "WorkersByTeams"
