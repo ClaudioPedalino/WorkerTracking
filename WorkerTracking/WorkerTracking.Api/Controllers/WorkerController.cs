@@ -31,7 +31,10 @@ namespace WorkerTracking.Api.Controllers
         {
             IEnumerable<WorkerModel> response = await _mediator.Send(request);
 
-            return Ok(new PagedResponse<WorkerModel>(response));
+            return Ok(new PagedResponse<WorkerModel>(
+                data: response, 
+                pageNumber: request.PageNumber,
+                pageSize: request.PageSize));
         }
 
         // Patch api/<WorkerController>/5
