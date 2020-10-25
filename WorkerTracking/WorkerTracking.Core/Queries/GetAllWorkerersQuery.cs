@@ -10,6 +10,8 @@ namespace WorkerTracking.Core.Queries
 {
     public class GetAllWorkerersQuery : PaginationFilter, IRequest<IEnumerable<WorkerModel>>
     {
-
+        public int? StatusId { get; set; }
+        public Guid? TeamId { get; set; }
+        public int? RoleId { get; set; }
     }
 }
