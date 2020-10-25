@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Common;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
-using WorkerTracking.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,15 +22,25 @@ namespace WorkerTracking.Api.Controllers
         }
 
         // GET: api/<WorkerController>
-        [HttpGet]
+        [HttpGet("get-all")]
         public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkerersQuery request)
         {
-            IEnumerable<WorkerModel> response = await _mediator.Send(request);
+            var response = await _mediator.Send(request);
 
             return Ok(new PagedResponse<WorkerModel>(
-                data: response, 
+                data: response.Item1,
                 pageNumber: request.PageNumber,
+                totalResults: response.Item2,
                 pageSize: request.PageSize));
+        }
+
+        // GET api/<WorkerController>/5
+        [HttpGet("get-by-id")]
+        public async Task<WorkerModel> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
+        {
+            var response = await _mediator.Send(request);
+
+            return response;
         }
 
         // Patch api/<WorkerController>/5
@@ -46,14 +52,6 @@ namespace WorkerTracking.Api.Controllers
             return response;
         }
 
-
-        // GET api/<WorkerController>/5
-        //[HttpGet("{id}")]
-        //public Worker Get(GetWorkererByIdQuery request)
-        //{
-
-        //    return null;
-        //}
 
         // POST api/<WorkerController>
         //[HttpPost]

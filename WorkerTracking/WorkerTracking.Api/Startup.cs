@@ -1,3 +1,4 @@
+using EnumsNET;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Linq;
 using WorkerTracking.Core.Common;
 using WorkerTracking.Core.Handlers;
 using WorkerTracking.Data;
@@ -27,29 +29,27 @@ namespace WorkerTracking.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-
-            if(Configuration.GetSection("DataProvider:UsingPostgre").Value.Equals(BooleanEnum.True.ToString()))
-            {
-                services.AddDbContext<DataContext>(options => options
-                    .UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
-            }
-            if(Configuration.GetSection("DataProvider:UsingLocalDb").Value.Equals(BooleanEnum.True.ToString()))
-            {
-                services.AddDbContext<DataContext>(options => options
-                    .UseInMemoryDatabase(databaseName: "LocalDb"));
-            }
-
+            
+            RegisterDatabase(services);
 
             services.AddMediatR(typeof(GetAllWorkerersQueryHandler).Assembly);
 
-            //services.AddSingleton<IBaseGetRequest, BaseGetRequest>();
             services.AddTransient<IWorkerRepository, WorkerRepository>();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Worker Tracking Api", Version = "v1" });
             });
+        }
+
+        private void RegisterDatabase(IServiceCollection services)
+        {
+            if (Configuration.GetSection("DataProvider:UsingPostgre").Value.Equals(BooleanEnum.True.ToString()))
+                services.AddDbContext<DataContext>(options => options
+                    .UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
+            if (Configuration.GetSection("DataProvider:UsingLocalDb").Value.Equals(BooleanEnum.True.ToString()))
+                services.AddDbContext<DataContext>(options => options
+                    .UseInMemoryDatabase(databaseName: "LocalDb"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

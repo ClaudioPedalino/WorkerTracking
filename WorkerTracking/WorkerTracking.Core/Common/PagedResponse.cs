@@ -9,14 +9,16 @@ namespace WorkerTracking.Core.Common
     {
         public PagedResponse() { }
 
-        public PagedResponse(IEnumerable<T> data, int? pageNumber = 1, int? pageSize = 25)
+        public PagedResponse(IEnumerable<T> data, int totalResults, int? pageNumber = 1, int? pageSize = 25)
         {
             PageNumber = pageNumber;
+            TotalResults = totalResults;
             PageSize = pageSize;
             Data = data;
         }
 
         public int? PageNumber { get; }
+        public int TotalResults { get; }
         public int? PageSize { get; }
         public string OrderBy { get; set; }
         public IEnumerable<T> Data { get; set; }
