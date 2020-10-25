@@ -10,8 +10,8 @@ using WorkerTracking.Data;
 namespace WorkerTracking.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201024220757_init")]
-    partial class init
+    [Migration("20201025034256_pepecito")]
+    partial class pepecito
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace WorkerTracking.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Abbreviation")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -71,11 +74,17 @@ namespace WorkerTracking.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("LastModificationTime")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("LastName")
                         .HasColumnType("text");
@@ -112,11 +121,9 @@ namespace WorkerTracking.Data.Migrations
 
                     b.HasKey("WorkersByTeamId");
 
-                    b.HasIndex("TeamId")
-                        .IsUnique();
+                    b.HasIndex("TeamId");
 
-                    b.HasIndex("WorkerId")
-                        .IsUnique();
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("WorkersByTeams");
                 });
@@ -139,14 +146,14 @@ namespace WorkerTracking.Data.Migrations
             modelBuilder.Entity("WorkerTracking.Entities.WorkersByTeam", b =>
                 {
                     b.HasOne("WorkerTracking.Entities.Team", "Team")
-                        .WithOne("WorkersByTeamId")
-                        .HasForeignKey("WorkerTracking.Entities.WorkersByTeam", "TeamId")
+                        .WithMany("WorkersByTeamId")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WorkerTracking.Entities.Worker", "Worker")
-                        .WithOne("WorkersByTeamId")
-                        .HasForeignKey("WorkerTracking.Entities.WorkersByTeam", "WorkerId")
+                        .WithMany("WorkersByTeamId")
+                        .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

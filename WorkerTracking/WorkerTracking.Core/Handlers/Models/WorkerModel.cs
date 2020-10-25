@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace WorkerTracking.Entities
+namespace WorkerTracking.Core.Handlers.Models
 {
-    public class Worker
+    public class WorkerModel
     {
         public Guid WorkerId { get; set; }
         public string FirstName { get; set; }
@@ -11,14 +12,11 @@ namespace WorkerTracking.Entities
         public string Email { get; set; }
         public DateTime Birthday { get; set; }
         public string PhotoUrl { get; set; }
-        public int StatusId { get; set; }
-        public int RoleId { get; set; }
+        public string StatusName { get; set; }
+        public string Role { get; set; }
         public DateTime LastModificationTime { get; set; }
-
-        public virtual Status Status { get; set; }
-        public virtual Role Role { get; set; }
-        
-        public virtual List<WorkersByTeam> WorkersByTeamId { get; set; }
+        public bool IsBirthdayToday { get; set; }
+        public List<string> Teams { get; set; }
 
     }
 }

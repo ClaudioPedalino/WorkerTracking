@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WorkerTracking.Data.Migrations
 {
-    public partial class init : Migration
+    public partial class pepe : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,8 @@ namespace WorkerTracking.Data.Migrations
                 {
                     RoleId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Abbreviation = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,9 +55,11 @@ namespace WorkerTracking.Data.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    Birthday = table.Column<DateTime>(nullable: false),
                     PhotoUrl = table.Column<string>(nullable: true),
                     StatusId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
+                    RoleId = table.Column<int>(nullable: false),
+                    LastModificationTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
