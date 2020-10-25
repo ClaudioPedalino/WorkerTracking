@@ -28,8 +28,18 @@ namespace WorkerTracking.Api
         {
             services.AddControllers();
 
-            services.AddDbContext<DataContext>(options => options
-                .UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
+
+            if(Configuration.GetSection("DataProvider:UsingPostgre").Value.Equals(BooleanEnum.True.ToString()))
+            {
+                services.AddDbContext<DataContext>(options => options
+                    .UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
+            }
+            if(Configuration.GetSection("DataProvider:UsingLocalDb").Value.Equals(BooleanEnum.True.ToString()))
+            {
+                services.AddDbContext<DataContext>(options => options
+                    .UseInMemoryDatabase(databaseName: "LocalDb"));
+            }
+
 
             services.AddMediatR(typeof(GetAllWorkerersQueryHandler).Assembly);
 
