@@ -20,6 +20,7 @@ namespace WorkerTracking.Data.Repositories
         public async Task<IEnumerable<Worker>> GetAllWorkersAsync()
         {
             List<Worker> response = await _context.Workers
+                .Where(x => x.IsActive)
                 .Include(x => x.Status)
                 .Include(x => x.Role)
                 .Include(x => x.WorkersByTeamId)
@@ -31,7 +32,13 @@ namespace WorkerTracking.Data.Repositories
 
         public async Task<Worker> GetWorkerByIdAsync(Guid WorkerId)
         {
-            return await _context.Workers.Where(x => x.WorkerId == WorkerId).FirstOrDefaultAsync();
+            return await _context.Workers
+                .Where(x => x.WorkerId == WorkerId)
+                .Include(x => x.Status)
+                .Include(x => x.Role)
+                .Include(x => x.WorkersByTeamId)
+                    .ThenInclude(y => y.Team)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<string> UpdateWorkerStatusAsync(Guid workerId, int statusId)

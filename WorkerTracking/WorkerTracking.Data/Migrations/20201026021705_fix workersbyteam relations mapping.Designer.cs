@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WorkerTracking.Data;
@@ -9,9 +10,10 @@ using WorkerTracking.Data;
 namespace WorkerTracking.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201026021705_fix workersbyteam relations mapping")]
+    partial class fixworkersbyteamrelationsmapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,14 +143,24 @@ namespace WorkerTracking.Data.Migrations
                     b.Property<Guid>("TeamId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("TeamId1")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("WorkerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("WorkerId1")
                         .HasColumnType("uuid");
 
                     b.HasKey("WorkersByTeamId");
 
                     b.HasIndex("TeamId");
 
+                    b.HasIndex("TeamId1");
+
                     b.HasIndex("WorkerId");
+
+                    b.HasIndex("WorkerId1");
 
                     b.ToTable("WorkersByTeams");
                 });
@@ -185,17 +197,25 @@ namespace WorkerTracking.Data.Migrations
 
             modelBuilder.Entity("WorkerTracking.Entities.WorkersByTeam", b =>
                 {
-                    b.HasOne("WorkerTracking.Entities.Team", "Team")
+                    b.HasOne("WorkerTracking.Entities.Team", null)
                         .WithMany("WorkersByTeamId")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WorkerTracking.Entities.Worker", "Worker")
+                    b.HasOne("WorkerTracking.Entities.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId1");
+
+                    b.HasOne("WorkerTracking.Entities.Worker", null)
                         .WithMany("WorkersByTeamId")
                         .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("WorkerTracking.Entities.Worker", "Worker")
+                        .WithMany()
+                        .HasForeignKey("WorkerId1");
                 });
 #pragma warning restore 612, 618
         }

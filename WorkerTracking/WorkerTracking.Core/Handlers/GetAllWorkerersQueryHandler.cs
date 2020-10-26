@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ using WorkerTracking.Data.Interfaces;
 
 namespace WorkerTracking.Core.Handlers
 {
-    public class GetAllWorkerersQueryHandler : IRequestHandler<GetAllWorkerersQuery, IEnumerable<WorkerModel>>
+    public class GetAllWorkerersQueryHandler : IRequestHandler<GetAllWorkerersQuery, Tuple<IEnumerable<WorkerModel>,int>>
     {
         private readonly IWorkerRepository _workerRepository;
 
@@ -21,7 +21,7 @@ namespace WorkerTracking.Core.Handlers
             _workerRepository = workerRepository;
         }
 
-        public async Task<IEnumerable<WorkerModel>> Handle(GetAllWorkerersQuery request, CancellationToken cancellationToken)
+        public async Task<Tuple<IEnumerable<WorkerModel>, int>> Handle(GetAllWorkerersQuery request, CancellationToken cancellationToken)
         {
             var workersDb = await _workerRepository.GetAllWorkersAsync();
 
@@ -31,18 +31,21 @@ namespace WorkerTracking.Core.Handlers
             if (NeedToFilter(request))
                 response = FilterResults(request, response);
 
-            return response
+            return new Tuple<IEnumerable<WorkerModel>, int>(response
                 .Skip(PaginationHelper.GetSkipRows(request))
-                .Take(request.PageSize);
+                .Take(request.PageSize), 
+                workersDb.Count());
         }
 
-        private static bool NeedToFilter(GetAllWorkerersQuery request) 
-            => request.StatusId.HasValue 
-            || request.RoleId.HasValue 
-            || request.TeamId.HasValue;
+        private static bool NeedToFilter(GetAllWorkerersQuery request)
+            => request.StatusId.HasValue
+            || request.RoleId.HasValue
+            || request.TeamId.HasValue
+            || !string.IsNullOrWhiteSpace(request.NameToSearch);
 
         private List<WorkerModel> FilterResults(GetAllWorkerersQuery request, List<WorkerModel> response)
         {
+            //TODO: Refactor .ToRepository
             if (request.StatusId.HasValue)
                 response = response.Where(x => x.StatusId == request.StatusId).ToList();
 
@@ -54,6 +57,12 @@ namespace WorkerTracking.Core.Handlers
                 //var pepe = response.SelectMany(x => x.Teams.Where(y => y.TeamId == request.TeamId.Value));
                 //var tete = response.ForEach(x => x.Teams.Where(x => x.TeamId == request.TeamId));
             }
+            if (!string.IsNullOrWhiteSpace(request.NameToSearch))
+            {
+                response = response.Where(x => EF.Functions.Like(x.FirstName, $"%{request.NameToSearch}%")
+                                            || EF.Functions.Like(x.LastName, $"%{request.NameToSearch}%"))
+                                   .ToList();
+            }
 
             return response;
         }
@@ -62,7 +71,7 @@ namespace WorkerTracking.Core.Handlers
         {
             //TODO: <refactor>
             var response = new List<WorkerModel>();
-            
+
             foreach (var w in workersDb)
             {
                 var worker = new WorkerModel()
@@ -79,7 +88,7 @@ namespace WorkerTracking.Core.Handlers
                     RoleId = w.Role.RoleId,
                     LastModificationTime = w.LastModificationTime,
                     IsBirthdayToday = VerifyBirthday(DateTime.Now, w.Birthday), ///logica de sábados y domingos
-                    Teams = w.WorkersByTeamId.Select(x => new TeamsModel() {TeamId = x.Team.TeamId, Name = x.Team.Name }).ToList()
+                    Teams = w.WorkersByTeamId.Select(x => new TeamsModel() { TeamId = x.Team.TeamId, Name = x.Team.Name }).ToList()
                 };
                 response.Add(worker);
             }

@@ -14,6 +14,7 @@ namespace WorkerTracking.Entities
         public int StatusId { get; set; }
         public int RoleId { get; set; }
         public DateTime LastModificationTime { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual Status Status { get; set; }
         public virtual Role Role { get; set; }

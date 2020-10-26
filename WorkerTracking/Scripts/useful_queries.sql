@@ -1,4 +1,4 @@
-
+/*----- Drop Database -----------------------------------*/
 -- close existing connections
 -- SELECT pg_terminate_backend(pg_stat_activity.pid)
 -- FROM pg_stat_activity
@@ -7,14 +7,23 @@
 
 -- -- drop db
 -- DROP DATABASE "WorkerTracking"
+/*-------------------------------------------------------*/
 
-
+/*----- Selects -----------------------------------------*/
 -- SELECT * FROM "Roles"
 -- SELECT * FROM "Status"
 -- SELECT * FROM "Teams"
 -- SELECT * FROM "Workers"
 -- SELECT * FROM "WorkersByTeams"
+/*-------------------------------------------------------*/
 
+/*----- Descrbie Column -----------------------------------*/
+-- SELECT column_name, data_type, character_maximum_length, column_default, is_nullable
+-- FROM INFORMATION_SCHEMA.COLUMNS 
+-- WHERE table_name = 'Workers';
+/*---------------------------------------------------------*/
+
+/*----- INSERT DATA: -----------------------------------*/
 -- Status
 insert into "Status" ("StatusId", "Name") values (1, 'Active');
 insert into "Status" ("StatusId", "Name") values (2, 'Inactive');
@@ -30,9 +39,11 @@ insert into "Roles" ("RoleId", "Abbreviation", "Name") values (4, 'Dev', 'Fronte
 insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5, 'Dev', 'Backeck Developer');
 insert into "Roles" ("RoleId", "Abbreviation", "Name") values (6, 'Dev', 'Fullstack Developer');
 insert into "Roles" ("RoleId", "Abbreviation", "Name") values (7, 'QA', 'Quality Assurance');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (8, 'UX', 'User Experience');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (9, 'FA', 'Analista');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (10, 'D', 'Designer');
+|insert into "Roles" ("RoleId", "Abbreviation", "Name") values (8, 'UX', 'User Experience');
+insert into "Roles" ("RoleId", "Abbreviation", "Name") values (9, 'FA', 'Functional Analyst');
+insert into "Roles" ("RoleId", "Abbreviation", "Name") values (10, 'GD', 'Graphic Designer');
+insert into "Roles" ("RoleId", "Abbreviation", "Name") values (11, 'HR', 'Human Resources');
+insert into "Roles" ("RoleId", "Abbreviation", "Name") values (12, 'TS', 'Technical Support');
 
 -- Teams
 insert into "Teams" ("TeamId", "Name") values ('62d0cb9b-e81a-4a6b-98dc-73fe0028ee05', 'Tokio');
@@ -45,7 +56,6 @@ insert into "Teams" ("TeamId", "Name") values ('c0490f7a-922c-44c1-bb28-056f0075
 insert into "Teams" ("TeamId", "Name") values ('6d7d34a6-0849-4647-aa3b-503d9b73ea44', 'Praga');
 insert into "Teams" ("TeamId", "Name") values ('7d93a479-2776-4c15-848d-56ee77982003', 'Budapest');
 insert into "Teams" ("TeamId", "Name") values ('46cff0d5-cd50-429c-9ac2-0394e3410502', 'Habana');
-
 
 -- Workers
 insert into "Workers" ("WorkerId", "FirstName", "LastName", "Email", "Birthday", "PhotoUrl", "StatusId", "RoleId", "LastModificationTime") values ('c9448fa0-3934-4869-98bf-250797362a56', 'Emmye', 'Gheorghe', 'egheorghe0@xinhuanet.com', '1972-05-15 20:50:53', 'https://robohash.org/atpariaturvoluptatem.png?size=50x50&set=set1', 4, 6, '2020-10-23 01:28:21');
@@ -1094,9 +1104,23 @@ insert into "WorkersByTeams" ("WorkersByTeamId", "WorkerId", "TeamId") values ('
 insert into "WorkersByTeams" ("WorkersByTeamId", "WorkerId", "TeamId") values ('13e3e559-a4fc-4b92-a206-5c4e339403e8', '91373a4b-6ece-47a4-be2a-ebc1d072e4f5','8f8ba2dc-b811-48e3-944f-5bc7df720173');
 insert into "WorkersByTeams" ("WorkersByTeamId", "WorkerId", "TeamId") values ('3071ec9a-925d-4316-b619-ff1adecca48c', '5f3a85b9-b6e5-47bc-89a1-b68ba8f0b07d','4a81769d-56f6-4a8b-8ec9-480a486c612c');
 
+
 -- SELECT * 
 -- FROM "Workers" 
 -- INNER JOIN "WorkersByTeams" ON "WorkersByTeams"."WorkerId" = "Workers"."WorkerId"
 -- Where "Workers"."WorkerId" = @WorkerId
 
 -- uff la puta madre, como lleva tiempo generar data falopa...
+
+-- SELECT * FROM "Workers"
+-- WHERE "FirstName" ILIKE '%ORA%'
+--     OR "LastName" ILIKE '%ORA%'
+ 
+
+
+/*==== TODOs ====================================================*/
+-- FILTERS QUERIES
+    -- SELECT * WORKERS BY STATUS
+    -- SELECT * WORKERS BY ROLE
+    -- SELECT * WORKERS BY TEAM
+/*===============================================================*/

@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using WorkerTracking.Data.EntityConfigurations;
 using WorkerTracking.Entities;
 
 namespace WorkerTracking.Data
 {
     public class DataContext : DbContext
-	{
-		public DataContext(DbContextOptions options) : base(options) { }
+    {
+        public DataContext(DbContextOptions options) : base(options) { }
 
 
         public DbSet<Worker> Workers { get; set; }
@@ -17,13 +18,22 @@ namespace WorkerTracking.Data
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.EnableSensitiveDataLogging();
-		}
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new WorkersEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new RolesEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new TeamsEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new StatusEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkersByTeamEntityConfiguration());
 
-		}
-	}
+            modelBuilder.Entity<Status>().HasData(new Status[]
+            { new Status (1, "Pepe") ,
+              new Status (2, "Tete") }
+            );
+        }
+    }
 }

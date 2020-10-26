@@ -8,6 +8,7 @@ namespace WorkerTracking.Data.Interfaces
     public interface IWorkerRepository
     {
         Task<IEnumerable<Worker>> GetAllWorkersAsync();
+        Task<Worker> GetWorkerByIdAsync(Guid WorkerId);
         Task<string> UpdateWorkerStatusAsync(Guid workerId, int statusId);
     }
 }

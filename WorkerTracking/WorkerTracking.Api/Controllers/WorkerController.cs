@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using System;
+using System.Threading.Tasks;
+using WorkerTracking.Api.Common;
 using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Common;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
-using WorkerTracking.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,41 +18,67 @@ namespace WorkerTracking.Api.Controllers
     public class WorkerController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ILogger _logger;
 
-        public WorkerController(IMediator mediator)
+        public WorkerController(IMediator mediator, ILogger logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
-        // GET: api/<WorkerController>
-        [HttpGet]
+        [HttpGet(Routes.GetAll)]
         public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkerersQuery request)
         {
-            IEnumerable<WorkerModel> response = await _mediator.Send(request);
+            try
+            {
+                var response = await _mediator.Send(request);
 
-            return Ok(new PagedResponse<WorkerModel>(
-                data: response, 
-                pageNumber: request.PageNumber,
-                pageSize: request.PageSize));
+                return Ok(new PagedResponse<WorkerModel>(
+                    data: response.Item1,
+                    pageNumber: request.PageNumber,
+                    totalResults: response.Item2,
+                    pageSize: request.PageSize));
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.GetAll} with message: {ex.Message}");
+                return null;
+            }
+
         }
 
-        // Patch api/<WorkerController>/5
-        [HttpPatch("update-status")]
+        [HttpGet(Routes.GetById)]
+        public async Task<WorkerModel> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
+        {
+            try
+            {
+                var response = await _mediator.Send(request);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.GetById} with message: {ex.Message}");
+                return null;
+            }
+        }
+
+        [HttpPatch(Routes.UpdateStatus)]
         public async Task<string> UpdateWorkerStatusAsync([FromBody] UpdateWorkerStatusCommand command)
         {
-            var response = await _mediator.Send(command);
+            try
+            {
+                var response = await _mediator.Send(command);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.UpdateStatus} with message: {ex.Message}");
+                return null;
+            }
         }
 
-
-        // GET api/<WorkerController>/5
-        //[HttpGet("{id}")]
-        //public Worker Get(GetWorkererByIdQuery request)
-        //{
-
-        //    return null;
-        //}
 
         // POST api/<WorkerController>
         //[HttpPost]
