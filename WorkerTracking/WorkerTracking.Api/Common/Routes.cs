@@ -11,7 +11,12 @@ namespace WorkerTracking.Api.Common
         public const string GetAll = "get-all";
         public const string GetById = "get-by-id";
         public const string UpdateStatus = "update-status";
+        #endregion
 
+        #region HealthCheck-Controller
+        public const string Live = "live";
+        public const string Ready = "ready";
+        public const string UI = "ui-data";
         #endregion
     }
 }
