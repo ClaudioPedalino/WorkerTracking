@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using WorkerTracking.Core.Common;
@@ -36,6 +37,16 @@ namespace WorkerTracking.Api
             services.AddMediatR(typeof(GetAllWorkerersQueryHandler).Assembly);
 
             services.AddTransient<IWorkerRepository, WorkerRepository>();
+
+            services.AddSingleton<Serilog.ILogger>(opt =>
+            {
+                return new LoggerConfiguration().WriteTo.
+                    PostgreSQL(Configuration["ConnectionStrings:PostgreSql"],
+                                Configuration["ConnectionStrings:LogTable"],
+                                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
+                                needAutoCreateTable: true)
+                    .CreateLogger();
+            });
 
             services.AddSwaggerGen(c =>
             {
