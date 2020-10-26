@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 using System.Linq;
 using WorkerTracking.Core.Common;
 using WorkerTracking.Core.Handlers;
@@ -39,18 +40,46 @@ namespace WorkerTracking.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Worker Tracking Api", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Scheme = "bearer",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                        },
+                        new List<string>()
+                    }
+                });
             });
         }
 
         private void RegisterDatabase(IServiceCollection services)
         {
-            if (Configuration.GetSection("DataProvider:UsingPostgre").Value.Equals(BooleanEnum.True.ToString()))
+            if (UsingPostgre())
                 services.AddDbContext<DataContext>(options => options
                     .UseNpgsql(Configuration.GetConnectionString("PostgreSql")));
-            if (Configuration.GetSection("DataProvider:UsingLocalDb").Value.Equals(BooleanEnum.True.ToString()))
+            if (UsingLocalDb())
                 services.AddDbContext<DataContext>(options => options
                     .UseInMemoryDatabase(databaseName: "LocalDb"));
         }
+
+        private bool UsingLocalDb() 
+            => Configuration.GetSection("DataProvider:UsingLocalDb").Value.ToString().ToLower()
+                .Equals(BooleanEnum.True.ToString().ToLower());
+
+        private bool UsingPostgre() 
+            => Configuration.GetSection("DataProvider:UsingPostgre").Value.ToString().ToLower()
+                .Equals(BooleanEnum.True.ToString().ToLower());
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
