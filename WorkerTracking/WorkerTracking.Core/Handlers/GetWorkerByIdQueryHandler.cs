@@ -39,7 +39,7 @@ namespace WorkerTracking.Core.Handlers
                 LastModificationTime = workerDb.LastModificationTime,
                 //TODO:
                 //IsBirthdayToday = VerifyBirthday(DateTime.Now, workerDb.Birthday), ///logica de sábados y domingos
-                Teams = workerDb.WorkersByTeamId.Select(x => new TeamsModel() { TeamId = x.Team.TeamId, Name = x.Team.Name }).ToList()
+                Teams = workerDb.WorkersByTeamId.Select(x => new TeamModel(x.Team.TeamId, x.Team.Name)).ToList()
             };
 
             return response;

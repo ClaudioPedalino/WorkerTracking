@@ -12,16 +12,16 @@ using WorkerTracking.Data.Interfaces;
 
 namespace WorkerTracking.Core.Handlers
 {
-    public class GetAllWorkerersQueryHandler : IRequestHandler<GetAllWorkerersQuery, Tuple<IEnumerable<WorkerModel>,int>>
+    public class GetAllWorkersQueryHandler : IRequestHandler<GetAllWorkersQuery, Tuple<IEnumerable<WorkerModel>,int>>
     {
         private readonly IWorkerRepository _workerRepository;
 
-        public GetAllWorkerersQueryHandler(IWorkerRepository workerRepository)
+        public GetAllWorkersQueryHandler(IWorkerRepository workerRepository)
         {
             _workerRepository = workerRepository;
         }
 
-        public async Task<Tuple<IEnumerable<WorkerModel>, int>> Handle(GetAllWorkerersQuery request, CancellationToken cancellationToken)
+        public async Task<Tuple<IEnumerable<WorkerModel>, int>> Handle(GetAllWorkersQuery request, CancellationToken cancellationToken)
         {
             var workersDb = await _workerRepository.GetAllWorkersAsync();
 
@@ -37,15 +37,15 @@ namespace WorkerTracking.Core.Handlers
                 workersDb.Count());
         }
 
-        private static bool NeedToFilter(GetAllWorkerersQuery request)
+        private static bool NeedToFilter(GetAllWorkersQuery request)
             => request.StatusId.HasValue
             || request.RoleId.HasValue
             || request.TeamId.HasValue
             || !string.IsNullOrWhiteSpace(request.NameToSearch);
 
-        private List<WorkerModel> FilterResults(GetAllWorkerersQuery request, List<WorkerModel> response)
+        private List<WorkerModel> FilterResults(GetAllWorkersQuery request, List<WorkerModel> response)
         {
-            //TODO: Refactor .ToRepository
+            //TODO: Refactor Create Object filter and move filter to repository
             if (request.StatusId.HasValue)
                 response = response.Where(x => x.StatusId == request.StatusId).ToList();
 
@@ -55,7 +55,7 @@ namespace WorkerTracking.Core.Handlers
             if (request.TeamId.HasValue)
             {
                 //var pepe = response.SelectMany(x => x.Teams.Where(y => y.TeamId == request.TeamId.Value));
-                //var tete = response.ForEach(x => x.Teams.Where(x => x.TeamId == request.TeamId));
+                //var tete = response.ForEach(x => x.Teams.S(y => y.TeamId == request.TeamId));
             }
             if (!string.IsNullOrWhiteSpace(request.NameToSearch))
             {
@@ -69,12 +69,9 @@ namespace WorkerTracking.Core.Handlers
 
         private List<WorkerModel> CreateResponse(IEnumerable<Entities.Worker> workersDb)
         {
-            //TODO: <refactor>
             var response = new List<WorkerModel>();
-
-            foreach (var w in workersDb)
-            {
-                var worker = new WorkerModel()
+            response.AddRange(
+                workersDb.Select(w => new WorkerModel()
                 {
                     WorkerId = w.WorkerId,
                     FirstName = w.FirstName,
@@ -88,26 +85,15 @@ namespace WorkerTracking.Core.Handlers
                     RoleId = w.Role.RoleId,
                     LastModificationTime = w.LastModificationTime,
                     IsBirthdayToday = VerifyBirthday(DateTime.Now, w.Birthday), ///logica de sábados y domingos
-                    Teams = w.WorkersByTeamId.Select(x => new TeamsModel() { TeamId = x.Team.TeamId, Name = x.Team.Name }).ToList()
-                };
-                response.Add(worker);
-            }
-
+                    Teams = w.WorkersByTeamId.Select(x => new TeamModel(x.Team.TeamId, x.Team.Name)).ToList()
+                }));
+            
             return response;
         }
 
 
-        //TODO: <refactor>
-        private bool VerifyBirthday(DateTime date, DateTime birthday)
-        {
-            if (date.Date.ToString("dd-MM").Equals(birthday.Date.ToString("dd-MM")))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        private bool VerifyBirthday(DateTime date, DateTime birthday) 
+            => date.Date.ToString("dd-MM")
+            .Equals(birthday.Date.ToString("dd-MM"));
     }
 }

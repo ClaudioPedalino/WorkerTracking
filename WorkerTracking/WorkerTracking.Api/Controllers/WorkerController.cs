@@ -9,8 +9,6 @@ using WorkerTracking.Core.Common;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WorkerTracking.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -26,8 +24,8 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Routes.GetAll)]
-        public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkerersQuery request)
+        [HttpGet(Routes.Get_All_Workers)]
+        public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkersQuery request)
         {
             try
             {
@@ -41,13 +39,13 @@ namespace WorkerTracking.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, $"Operation failed into controller {Routes.GetAll} with message: {ex.Message}");
+                _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Workers} with message: {ex.Message}");
                 return null;
             }
 
         }
 
-        [HttpGet(Routes.GetById)]
+        [HttpGet(Routes.Get_Worker_By_Id)]
         public async Task<WorkerModel> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
         {
             try
@@ -58,12 +56,12 @@ namespace WorkerTracking.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, $"Operation failed into controller {Routes.GetById} with message: {ex.Message}");
+                _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Workers} with message: {ex.Message}");
                 return null;
             }
         }
 
-        [HttpPatch(Routes.UpdateStatus)]
+        [HttpPatch(Routes.Update_Worker_Status)]
         public async Task<string> UpdateWorkerStatusAsync([FromBody] UpdateWorkerStatusCommand command)
         {
             try
@@ -74,7 +72,7 @@ namespace WorkerTracking.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, $"Operation failed into controller {Routes.UpdateStatus} with message: {ex.Message}");
+                _logger.Error(ex, $"Operation failed into controller {Routes.Update_Worker_Status} with message: {ex.Message}");
                 return null;
             }
         }

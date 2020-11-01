@@ -17,9 +17,8 @@ namespace WorkerTracking.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Worker>> GetAllWorkersAsync()
-        {
-            List<Worker> response = await _context.Workers
+        public async Task<IEnumerable<Worker>> GetAllWorkersAsync() 
+            => await _context.Workers
                 .Where(x => x.IsActive)
                 .Include(x => x.Status)
                 .Include(x => x.Role)
@@ -27,19 +26,14 @@ namespace WorkerTracking.Data.Repositories
                     .ThenInclude(y => y.Team)
                 .ToListAsync();
 
-            return response;
-        }
-
-        public async Task<Worker> GetWorkerByIdAsync(Guid WorkerId)
-        {
-            return await _context.Workers
+        public async Task<Worker> GetWorkerByIdAsync(Guid WorkerId) 
+            => await _context.Workers
                 .Where(x => x.WorkerId == WorkerId)
                 .Include(x => x.Status)
                 .Include(x => x.Role)
                 .Include(x => x.WorkersByTeamId)
                     .ThenInclude(y => y.Team)
                 .FirstOrDefaultAsync();
-        }
 
         public async Task<string> UpdateWorkerStatusAsync(Guid workerId, int statusId)
         {
@@ -53,7 +47,6 @@ namespace WorkerTracking.Data.Repositories
             _context.Update(workerDb);
             await _context.SaveChangesAsync();
             return "Worker Updated Correctly";
-
         }
     }
 }

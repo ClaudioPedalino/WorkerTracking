@@ -6,8 +6,14 @@ namespace WorkerTracking.Entities
 {
     public class Team
     {
-        public Guid TeamId { get; set; }
-        public string Name { get; set; }
+        public Team(string name)
+        {
+            Name = name;
+            WorkersByTeamId = new List<WorkersByTeam>();
+        }
+
+        public Guid TeamId { get; private set; }
+        public string Name { get; private set; }
 
         public virtual List<WorkersByTeam> WorkersByTeamId { get; set; }
     }

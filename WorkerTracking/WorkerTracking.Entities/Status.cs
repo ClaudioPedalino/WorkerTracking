@@ -2,8 +2,9 @@
 {
     public class Status
     {
-        public Status()
+        public Status(string name)
         {
+            Name = name;
         }
 
         public Status(int statusId, string name)
@@ -12,7 +13,7 @@
             Name = name;
         }
 
-        public int StatusId { get; set; }
-        public string Name { get; set; }
+        public int StatusId { get; private set; }
+        public string Name { get; private set; }
     }
 }

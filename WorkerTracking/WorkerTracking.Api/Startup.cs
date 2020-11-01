@@ -1,5 +1,5 @@
 using EnumsNET;
-using HealthChecks.UI.Client;
+//using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -11,8 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json;
+//using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -39,13 +39,36 @@ namespace WorkerTracking.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             RegisterDatabase(services);
 
-            services.AddMediatR(typeof(GetAllWorkerersQueryHandler).Assembly);
+            services.AddMediatR(typeof(GetAllWorkersQueryHandler).Assembly);
 
+            RegisterRepositories(services);
+            RegisterLogging(services);
+            RegisterSwagger(services);
+
+            #region TODO: fix health check
+            //services.AddHealthChecks()
+            //   .AddNpgSql(Configuration.GetConnectionString("PostgreSql"),
+            //       failureStatus: HealthStatus.Unhealthy,
+            //       tags: new[] { "ready" });
+
+            //services.AddHealthChecksUI().AddInMemoryStorage();
+            #endregion
+
+        }
+
+        private static void RegisterRepositories(IServiceCollection services)
+        {
             services.AddTransient<IWorkerRepository, WorkerRepository>();
+            services.AddTransient<IStatusRepository, StatusRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<ITeamRepository, TeamRepository>();
+        }
 
+        private void RegisterLogging(IServiceCollection services)
+        {
             services.AddSingleton<Serilog.ILogger>(opt =>
             {
                 return new LoggerConfiguration().WriteTo.
@@ -55,14 +78,10 @@ namespace WorkerTracking.Api
                                 needAutoCreateTable: true)
                     .CreateLogger();
             });
+        }
 
-            services.AddHealthChecks()
-               .AddNpgSql(Configuration.GetConnectionString("PostgreSql"),
-                   failureStatus: HealthStatus.Unhealthy,
-                   tags: new[] { "ready" });
-
-            services.AddHealthChecksUI().AddInMemoryStorage();
-
+        private static void RegisterSwagger(IServiceCollection services)
+        {
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Worker Tracking Api", Version = "v1" });
@@ -107,6 +126,7 @@ namespace WorkerTracking.Api
             => Configuration.GetSection("DataProvider:UsingPostgre").Value.ToString().ToLower()
                 .Equals(BooleanEnum.True.ToString().ToLower());
 
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -126,35 +146,35 @@ namespace WorkerTracking.Api
                 endpoints.MapControllers();
             });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapHealthChecks("api/health/ready", new HealthCheckOptions()
-                {
-                    ResultStatusCodes =
-                    {
-                        [HealthStatus.Healthy] = StatusCodes.Status200OK,
-                        [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
-                        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
-                    },
-                    ResponseWriter = WriteHealthCheckReadyResponse,
-                    Predicate = (check) => check.Tags.Contains("ready"),
-                    AllowCachingResponses = false
-                });
-                endpoints.MapHealthChecks("api/health/live", new HealthCheckOptions()
-                {
-                    Predicate = (check) => !check.Tags.Contains("ready"),
-                    ResponseWriter = WriteHealthCheckLiveResponse,
-                    AllowCachingResponses = false
-                });
-                endpoints.MapHealthChecks("api/health/ui", new HealthCheckOptions()
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //    endpoints.MapHealthChecks("api/health/ready", new HealthCheckOptions()
+            //    {
+            //        ResultStatusCodes =
+            //        {
+            //            [HealthStatus.Healthy] = StatusCodes.Status200OK,
+            //            [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
+            //            [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+            //        },
+            //        ResponseWriter = WriteHealthCheckReadyResponse,
+            //        Predicate = (check) => check.Tags.Contains("ready"),
+            //        AllowCachingResponses = false
+            //    });
+            //    endpoints.MapHealthChecks("api/health/live", new HealthCheckOptions()
+            //    {
+            //        Predicate = (check) => !check.Tags.Contains("ready"),
+            //        ResponseWriter = WriteHealthCheckLiveResponse,
+            //        AllowCachingResponses = false
+            //    });
+            //    endpoints.MapHealthChecks("api/health/ui", new HealthCheckOptions()
+            //    {
+            //        Predicate = _ => true,
+            //        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            //    });
+            //});
 
-            app.UseHealthChecksUI();
+            //app.UseHealthChecksUI();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -164,34 +184,34 @@ namespace WorkerTracking.Api
         }
 
         //Enrich Health Check Detail
-        private Task WriteHealthCheckLiveResponse(HttpContext httpContext, HealthReport result)
-        {
-            httpContext.Response.ContentType = "application/json";
+        //private Task WriteHealthCheckLiveResponse(HttpContext httpContext, HealthReport result)
+        //{
+        //    httpContext.Response.ContentType = "application/json";
 
-            var json = new JObject(
-                    new JProperty("OverallStatus", result.Status.ToString()),
-                    new JProperty("TotalCheckDuration", result.TotalDuration.TotalSeconds.ToString("0:0.00"))
-                );
-            return httpContext.Response.WriteAsync(json.ToString(Formatting.Indented));
-        }
+        //    var json = new JObject(
+        //            new JProperty("OverallStatus", result.Status.ToString()),
+        //            new JProperty("TotalCheckDuration", result.TotalDuration.TotalSeconds.ToString("0:0.00"))
+        //        );
+        //    return httpContext.Response.WriteAsync(json.ToString(Formatting.Indented));
+        //}
 
-        private Task WriteHealthCheckReadyResponse(HttpContext httpContext, HealthReport result)
-        {
-            httpContext.Response.ContentType = "application/json";
+        //private Task WriteHealthCheckReadyResponse(HttpContext httpContext, HealthReport result)
+        //{
+        //    httpContext.Response.ContentType = "application/json";
 
-            var json = new JObject(
-                    new JProperty("OverallStatus", result.Status.ToString()),
-                    new JProperty("TotalCheckDuration", result.TotalDuration.TotalSeconds.ToString("0:0.00")),
-                    new JProperty("DependencyHealthChecks", new JObject(result.Entries.Select(dicItem =>
-                        new JProperty(dicItem.Key, new JObject(
-                            new JProperty("Status", dicItem.Value.Status.ToString()),
-                            new JProperty("Duration", dicItem.Value.Duration.TotalSeconds.ToString("0:0.00")),
-                            new JProperty("Exception", dicItem.Value.Exception?.Message),
-                            new JProperty("Data", new JObject(dicItem.Value.Data.Select(dicData =>
-                                new JProperty(dicData.Key, dicData.Value))))
-                        ))))
-                ));
-            return httpContext.Response.WriteAsync(json.ToString(Formatting.Indented));
-        }
+        //    var json = new JObject(
+        //            new JProperty("OverallStatus", result.Status.ToString()),
+        //            new JProperty("TotalCheckDuration", result.TotalDuration.TotalSeconds.ToString("0:0.00")),
+        //            new JProperty("DependencyHealthChecks", new JObject(result.Entries.Select(dicItem =>
+        //                new JProperty(dicItem.Key, new JObject(
+        //                    new JProperty("Status", dicItem.Value.Status.ToString()),
+        //                    new JProperty("Duration", dicItem.Value.Duration.TotalSeconds.ToString("0:0.00")),
+        //                    new JProperty("Exception", dicItem.Value.Exception?.Message),
+        //                    new JProperty("Data", new JObject(dicItem.Value.Data.Select(dicData =>
+        //                        new JProperty(dicData.Key, dicData.Value))))
+        //                ))))
+        //        ));
+        //    return httpContext.Response.WriteAsync(json.ToString(Formatting.Indented));
+        //}
     }
 }

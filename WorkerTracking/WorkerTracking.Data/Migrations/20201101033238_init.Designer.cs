@@ -10,8 +10,8 @@ using WorkerTracking.Data;
 namespace WorkerTracking.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201026021354_add entity configurations")]
-    partial class addentityconfigurations
+    [Migration("20201101033238_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,80 @@ namespace WorkerTracking.Data.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 5001,
+                            Abbreviation = "PO",
+                            Name = "Product Owner"
+                        },
+                        new
+                        {
+                            RoleId = 5002,
+                            Abbreviation = "PM",
+                            Name = "Project Manager"
+                        },
+                        new
+                        {
+                            RoleId = 5003,
+                            Abbreviation = "TL",
+                            Name = "Team Leader"
+                        },
+                        new
+                        {
+                            RoleId = 5004,
+                            Abbreviation = "FD",
+                            Name = "Frontend Developer"
+                        },
+                        new
+                        {
+                            RoleId = 5005,
+                            Abbreviation = "BD",
+                            Name = "Backeck Developer"
+                        },
+                        new
+                        {
+                            RoleId = 5006,
+                            Abbreviation = "FS",
+                            Name = "Fullstack Developer"
+                        },
+                        new
+                        {
+                            RoleId = 5007,
+                            Abbreviation = "QA",
+                            Name = "Quality Assurance"
+                        },
+                        new
+                        {
+                            RoleId = 5008,
+                            Abbreviation = "UX",
+                            Name = "User Experience"
+                        },
+                        new
+                        {
+                            RoleId = 5009,
+                            Abbreviation = "FA",
+                            Name = "Functional Analyst"
+                        },
+                        new
+                        {
+                            RoleId = 50010,
+                            Abbreviation = "GD",
+                            Name = "Graphic Designer"
+                        },
+                        new
+                        {
+                            RoleId = 50011,
+                            Abbreviation = "HR",
+                            Name = "Human Resources"
+                        },
+                        new
+                        {
+                            RoleId = 50012,
+                            Abbreviation = "TS",
+                            Name = "Technical Support"
+                        });
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.Status", b =>
@@ -58,17 +132,44 @@ namespace WorkerTracking.Data.Migrations
                     b.HasKey("StatusId");
 
                     b.ToTable("Status");
+
+                    b.HasData(
+                        new
+                        {
+                            StatusId = 101,
+                            Name = "Active"
+                        },
+                        new
+                        {
+                            StatusId = 102,
+                            Name = "Inactive"
+                        },
+                        new
+                        {
+                            StatusId = 103,
+                            Name = "Pause"
+                        },
+                        new
+                        {
+                            StatusId = 104,
+                            Name = "Vacations"
+                        },
+                        new
+                        {
+                            StatusId = 105,
+                            Name = "In a meeting"
+                        });
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.Team", b =>
                 {
                     b.Property<Guid>("TeamId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("TeamsId")
+                        .HasColumnName("TeamId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
-                        .HasColumnName("FirstName")
+                        .HasColumnName("Name")
                         .HasColumnType("character varying(50)")
                         .HasMaxLength(50);
 
@@ -143,26 +244,25 @@ namespace WorkerTracking.Data.Migrations
                     b.Property<Guid>("TeamId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("TeamId1")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("WorkerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("WorkerId1")
                         .HasColumnType("uuid");
 
                     b.HasKey("WorkersByTeamId");
 
                     b.HasIndex("TeamId");
 
-                    b.HasIndex("TeamId1");
-
                     b.HasIndex("WorkerId");
 
-                    b.HasIndex("WorkerId1");
-
                     b.ToTable("WorkersByTeams");
+                });
+
+            modelBuilder.Entity("WorkerTracking.Entities.Team", b =>
+                {
+                    b.HasOne("WorkerTracking.Entities.WorkersByTeam", null)
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.Worker", b =>
@@ -178,29 +278,27 @@ namespace WorkerTracking.Data.Migrations
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("WorkerTracking.Entities.WorkersByTeam", null)
+                        .WithMany()
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.WorkersByTeam", b =>
                 {
                     b.HasOne("WorkerTracking.Entities.Team", "Team")
-                        .WithMany()
+                        .WithMany("WorkersByTeamId")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WorkerTracking.Entities.Team", null)
-                        .WithMany("WorkersByTeamId")
-                        .HasForeignKey("TeamId1");
-
                     b.HasOne("WorkerTracking.Entities.Worker", "Worker")
-                        .WithMany()
+                        .WithMany("WorkersByTeamId")
                         .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("WorkerTracking.Entities.Worker", null)
-                        .WithMany("WorkersByTeamId")
-                        .HasForeignKey("WorkerId1");
                 });
 #pragma warning restore 612, 618
         }

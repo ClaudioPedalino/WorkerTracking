@@ -17,8 +17,12 @@ namespace WorkerTracking.Data.EntityConfigurations
             builder.HasKey(e => e.RoleId);
 
             builder.Property(x => x.Name)
-                .HasMaxLength(50)
+                .HasMaxLength(40)
                 .HasAnnotation("Relational:ColumnName", "Name");
+
+            builder.Property(x => x.Abbreviation)
+                .HasMaxLength(2)
+                .HasAnnotation("Relational:ColumnName", "Abbreviation");
         }
     }
 }

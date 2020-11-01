@@ -17,7 +17,7 @@ namespace WorkerTracking.Data.EntityConfigurations
             builder.HasKey(e => e.StatusId);
 
             builder.Property(x => x.Name)
-                .HasMaxLength(50)
+                .HasMaxLength(30)
                 .HasAnnotation("Relational:ColumnName", "Name");
 
         }

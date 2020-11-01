@@ -18,7 +18,7 @@ namespace WorkerTracking.Core.Handlers.Models
         public string Role { get; set; }
         public DateTime LastModificationTime { get; set; }
         public bool IsBirthdayToday { get; set; }
-        public List<TeamsModel> Teams { get; set; }
+        public List<TeamModel> Teams { get; set; }
 
     }
 }

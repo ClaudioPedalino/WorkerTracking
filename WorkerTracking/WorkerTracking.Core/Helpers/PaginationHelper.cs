@@ -7,7 +7,7 @@ namespace WorkerTracking.Core.Helpers
 {
     public static class PaginationHelper
     {
-        public static int GetSkipRows(GetAllWorkerersQuery request)
+        public static int GetSkipRows(GetAllWorkersQuery request)
         {
             return (request.PageNumber - 1) * request.PageSize;
         }

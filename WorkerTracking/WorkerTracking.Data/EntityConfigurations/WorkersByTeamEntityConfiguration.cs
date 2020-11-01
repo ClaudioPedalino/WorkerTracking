@@ -18,7 +18,6 @@ namespace WorkerTracking.Data.EntityConfigurations
                 .ValueGeneratedOnAdd();
 
             builder.HasKey(e => e.WorkersByTeamId);
-
             
             #region relations
 

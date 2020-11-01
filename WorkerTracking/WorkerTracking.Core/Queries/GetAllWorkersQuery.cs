@@ -8,7 +8,7 @@ using WorkerTracking.Entities;
 
 namespace WorkerTracking.Core.Queries
 {
-    public class GetAllWorkerersQuery : PaginationFilter, IRequest<Tuple<IEnumerable<WorkerModel>, int>>
+    public class GetAllWorkersQuery : PaginationFilter, IRequest<Tuple<IEnumerable<WorkerModel>, int>>
     {
         public string? NameToSearch { get; set; }
         public int? StatusId { get; set; }

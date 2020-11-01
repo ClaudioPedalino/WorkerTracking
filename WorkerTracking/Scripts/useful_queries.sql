@@ -25,25 +25,25 @@
 
 /*----- INSERT DATA: -----------------------------------*/
 -- Status
-insert into "Status" ("StatusId", "Name") values (1, 'Active');
-insert into "Status" ("StatusId", "Name") values (2, 'Inactive');
-insert into "Status" ("StatusId", "Name") values (3, 'Pause');
-insert into "Status" ("StatusId", "Name") values (4, 'Vacations');
-insert into "Status" ("StatusId", "Name") values (5, 'In a meeting');
+-- insert into "Status" ("StatusId", "Name") values (101, 'Active');
+-- insert into "Status" ("StatusId", "Name") values (102, 'Inactive');
+-- insert into "Status" ("StatusId", "Name") values (103, 'Pause');
+-- insert into "Status" ("StatusId", "Name") values (104, 'Vacations');
+-- insert into "Status" ("StatusId", "Name") values (105, 'In a meeting');
 
--- Roles
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (1, 'PO', 'Product Owner');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (2, 'PM', 'Project Manager');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (3, 'TL', 'Team Leader');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (4, 'Dev', 'Frontend Developer');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5, 'Dev', 'Backeck Developer');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (6, 'Dev', 'Fullstack Developer');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (7, 'QA', 'Quality Assurance');
-|insert into "Roles" ("RoleId", "Abbreviation", "Name") values (8, 'UX', 'User Experience');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (9, 'FA', 'Functional Analyst');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (10, 'GD', 'Graphic Designer');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (11, 'HR', 'Human Resources');
-insert into "Roles" ("RoleId", "Abbreviation", "Name") values (12, 'TS', 'Technical Support');
+-- -- Roles
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5001, 'PO', 'Product Owner');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5002, 'PM', 'Project Manager');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5003, 'TL', 'Team Leader');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5004, 'Dev', 'Frontend Developer');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5005, 'Dev', 'Backeck Developer');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5006, 'Dev', 'Fullstack Developer');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5007, 'QA', 'Quality Assurance');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5008, 'UX', 'User Experience');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5009, 'FA', 'Functional Analyst');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5010, 'GD', 'Graphic Designer');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5011, 'HR', 'Human Resources');
+-- insert into "Roles" ("RoleId", "Abbreviation", "Name") values (5012, 'TS', 'Technical Support');
 
 -- Teams
 insert into "Teams" ("TeamId", "Name") values ('62d0cb9b-e81a-4a6b-98dc-73fe0028ee05', 'Tokio');
