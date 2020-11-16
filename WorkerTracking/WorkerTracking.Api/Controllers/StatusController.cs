@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using WorkerTracking.Api.Common;
@@ -26,6 +27,7 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet(Routes.Get_All_Status)]
         public async Task<ActionResult<StatusModel>> GetAllStatusAsync()
         {
@@ -41,6 +43,7 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Status)]
         public async Task<ActionResult> CreateStatusAysnc([FromBody] CreateStatusCommand command)
         {
@@ -56,6 +59,7 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Status)]
         public async Task<ActionResult> DeleteStatusAysnc([FromBody] DeleteStatusCommand command)
         {

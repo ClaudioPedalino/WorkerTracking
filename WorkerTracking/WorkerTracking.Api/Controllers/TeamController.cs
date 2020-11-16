@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using WorkerTracking.Api.Common;
@@ -27,6 +28,7 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet(Routes.Get_All_Teams)]
         public async Task<ActionResult<TeamModel>> GetAllTeamAsync()
         {
@@ -42,8 +44,9 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Team)]
-        public async Task<ActionResult> CreateTeamAysnc([FromBody] CreateTeamCommand command)
+        public async Task<IActionResult> CreateTeamAysnc([FromBody] CreateTeamCommand command)
         {
             try
             {
@@ -56,9 +59,10 @@ namespace WorkerTracking.Api.Controllers
                 return null;
             }
         }
-
+        
+        [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Team)]
-        public async Task<ActionResult> DeleteTeamAysnc([FromBody] DeleteTeamCommand command)
+        public async Task<IActionResult> DeleteTeamAysnc([FromBody] DeleteTeamCommand command)
         {
             try
             {

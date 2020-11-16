@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
@@ -24,6 +25,7 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet(Routes.Get_All_Workers)]
         public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkersQuery request)
         {
@@ -45,6 +47,7 @@ namespace WorkerTracking.Api.Controllers
 
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpGet(Routes.Get_Worker_By_Id)]
         public async Task<WorkerModel> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
         {
@@ -61,6 +64,7 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPatch(Routes.Update_Worker_Status)]
         public async Task<string> UpdateWorkerStatusAsync([FromBody] UpdateWorkerStatusCommand command)
         {
@@ -77,6 +81,7 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Worker)]
         public async Task<ActionResult> CreateWorkerAysnc([FromBody] CreateWorkerCommand command)
         {

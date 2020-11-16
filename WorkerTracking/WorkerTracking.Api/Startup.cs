@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,6 +48,12 @@ namespace WorkerTracking.Api
             RegisterRepositories(services);
             RegisterLogging(services);
             RegisterSwagger(services);
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             #region TODO: fix health check
             //services.AddHealthChecks()
@@ -119,15 +126,15 @@ namespace WorkerTracking.Api
                     .UseInMemoryDatabase(databaseName: "LocalDb"));
         }
 
-        private bool UsingLocalDb() 
+        private bool UsingLocalDb()
             => Configuration.GetSection("DataProvider:UsingLocalDb").Value.ToString().ToLower()
                 .Equals(BooleanEnum.True.ToString().ToLower());
 
-        private bool UsingPostgre() 
+        private bool UsingPostgre()
             => Configuration.GetSection("DataProvider:UsingPostgre").Value.ToString().ToLower()
                 .Equals(BooleanEnum.True.ToString().ToLower());
 
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -141,6 +148,9 @@ namespace WorkerTracking.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options.AllowAnyOrigin());
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -176,6 +186,9 @@ namespace WorkerTracking.Api
             //});
 
             //app.UseHealthChecksUI();
+
+            
+
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

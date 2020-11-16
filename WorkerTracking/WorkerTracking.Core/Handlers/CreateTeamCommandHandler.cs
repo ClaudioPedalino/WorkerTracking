@@ -14,9 +14,9 @@ namespace WorkerTracking.Core.Handlers
     {
         private readonly ITeamRepository _teamRepository;
 
-        public CreateTeamCommandHandler(ITeamRepository statusRepository)
+        public CreateTeamCommandHandler(ITeamRepository teamRepository)
         {
-            _teamRepository = statusRepository;
+            _teamRepository = teamRepository;
         }
 
         public async Task<string> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
