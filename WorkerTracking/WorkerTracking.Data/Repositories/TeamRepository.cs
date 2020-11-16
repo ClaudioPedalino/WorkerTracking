@@ -18,8 +18,29 @@ namespace WorkerTracking.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Team>> GetAllWorkersAsync() 
+        public async Task<IEnumerable<Team>> GetAllWorkersAsync()
             => await _context.Teams.ToListAsync();
 
+        public async Task<Team> GetTeamByIdAsync(Guid teamId)
+        => await _context.Teams
+                .Where(x => x.TeamId == teamId)
+                .FirstOrDefaultAsync();
+
+        public async Task CreateTeamAsync(Team entity)
+        {
+            await _context.Teams.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTeamAsync(Team entity)
+        {
+            _context.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        //public async Task<bool> IsBeingUsed(Team entity) :TODO
+        //{
+        //    return await _context.WorkersByTeams.AnyAsync(x => x.TeamId == entity.TeamId);
+        //}
     }
 }

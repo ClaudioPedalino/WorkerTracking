@@ -25,7 +25,7 @@ namespace WorkerTracking.Core.Handlers
 
             await _roleRepository.CreateRoleAsync(newRole);
 
-            return "ok";
+            return "Role created succesfully";
         }
     }
 }

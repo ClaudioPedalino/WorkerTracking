@@ -41,12 +41,6 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        //[HttpGet(Routes.Get_Status_By_Id)]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         [HttpPost(Routes.Create_Status)]
         public async Task<ActionResult> CreateStatusAysnc([FromBody] CreateStatusCommand command)
         {

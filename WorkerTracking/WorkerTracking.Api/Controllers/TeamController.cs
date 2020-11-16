@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using WorkerTracking.Api.Common;
+using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 
@@ -37,6 +38,36 @@ namespace WorkerTracking.Api.Controllers
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Teams} with message: {ex.Message}");
+                return null;
+            }
+        }
+
+        [HttpPost(Routes.Create_Team)]
+        public async Task<ActionResult> CreateTeamAysnc([FromBody] CreateTeamCommand command)
+        {
+            try
+            {
+                var response = await _mediator.Send(command);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.Create_Team} with message: {ex.Message}");
+                return null;
+            }
+        }
+
+        [HttpDelete(Routes.Delete_Team)]
+        public async Task<ActionResult> DeleteTeamAysnc([FromBody] DeleteTeamCommand command)
+        {
+            try
+            {
+                var response = await _mediator.Send(command);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.Create_Team} with message: {ex.Message}");
                 return null;
             }
         }

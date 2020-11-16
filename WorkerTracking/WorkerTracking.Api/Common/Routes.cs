@@ -10,7 +10,9 @@ namespace WorkerTracking.Api.Common
         #region Worker-Controller
         public const string Get_All_Workers = "get-all";
         public const string Get_Worker_By_Id = "get-by-id";
+        public const string Create_Worker = "create-worker";
         public const string Update_Worker_Status = "update-status";
+        public const string Delete_Worker = "delete-worker";
         #endregion
 
         #region Status-Controller
@@ -31,7 +33,10 @@ namespace WorkerTracking.Api.Common
 
         #region Team-Controller
         public const string Get_All_Teams = "get-all";
-        public const string Delete_Team = "delete-role";
+        public const string Get_Team_By_Id = "get-by-id";
+        public const string Create_Team = "create-team";
+        public const string Update_Team = "update-team";
+        public const string Delete_Team = "delete-team";
         #endregion
 
         #region HealthCheck-Controller

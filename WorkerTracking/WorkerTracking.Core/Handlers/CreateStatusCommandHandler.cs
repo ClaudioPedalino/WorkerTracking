@@ -26,7 +26,7 @@ namespace WorkerTracking.Core.Handlers
 
             await _statusRepository.CreateStatusAsync(newStatus);
 
-            return "ok";
+            return "Status created succesfully";
         }
     }
 }

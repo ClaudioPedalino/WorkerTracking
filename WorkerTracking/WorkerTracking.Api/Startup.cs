@@ -65,6 +65,7 @@ namespace WorkerTracking.Api
             services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<IWorkersByTeamRepository, WorkersByTeamRepository>();
         }
 
         private void RegisterLogging(IServiceCollection services)

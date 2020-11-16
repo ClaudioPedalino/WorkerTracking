@@ -77,23 +77,20 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
+        [HttpPost(Routes.Create_Worker)]
+        public async Task<ActionResult> CreateWorkerAysnc([FromBody] CreateWorkerCommand command)
+        {
+            try
+            {
+                var response = await _mediator.Send(command);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.Create_Worker} with message: {ex.Message}");
+                return null;
+            }
+        }
 
-        // POST api/<WorkerController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<WorkerController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<WorkerController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

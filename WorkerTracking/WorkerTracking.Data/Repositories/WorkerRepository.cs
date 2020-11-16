@@ -48,5 +48,11 @@ namespace WorkerTracking.Data.Repositories
             await _context.SaveChangesAsync();
             return "Worker Updated Correctly";
         }
+
+        public async Task CreateWorkerAsync(Worker entity)
+        {
+            await _context.Workers.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }

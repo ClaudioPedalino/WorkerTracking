@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using WorkerTracking.Api.Common;
+using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 
@@ -41,25 +42,35 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost(Routes.Create_Role)]
+        public async Task<ActionResult> CreateRoleAysnc([FromBody] CreateRoleCommand command)
         {
-            return "value";
+            try
+            {
+                var response = await _mediator.Send(command);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.Create_Role} with message: {ex.Message}");
+                return null;
+            }
         }
 
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpDelete(Routes.Delete_Role)]
+        public async Task<ActionResult> DeleteRoleAysnc([FromBody] DeleteRoleCommand command)
         {
+            try
+            {
+                var response = await _mediator.Send(command);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Operation failed into controller {Routes.Create_Role} with message: {ex.Message}");
+                return null;
+            }
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
