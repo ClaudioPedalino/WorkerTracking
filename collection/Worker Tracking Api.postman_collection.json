@@ -1,0 +1,2810 @@
+{
+	"info": {
+		"_postman_id": "4b19d92c-3b32-4046-9649-51cbbfbca92f",
+		"name": "Worker Tracking Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Role",
+					"item": [
+						{
+							"name": "/api/Role/get-all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/get-all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"get-all"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/get-all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"get-all"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"roleId\": -33477840,\n \"roleName\": \"in\",\n \"abbreviation\": \"velit in enim\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"roleTest\",\n    \"roleAbbreviation\": \"TST\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/delete-role",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleId\": 1\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/delete-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"delete-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleId\": \"<integer>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/delete-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"delete-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Status",
+					"item": [
+						{
+							"name": "/api/Status/get-all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/get-all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"get-all"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/get-all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"get-all"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"statusId\": 53238413,\n \"statusName\": \"quis consequat et sint dolor\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/Status/create-status",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"statusName\": \"StatusTest\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/create-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"create-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"statusName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/create-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"create-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Status/delete-status",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"statusId\": \"<integer>\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/delete-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"delete-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"statusId\": \"<integer>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/delete-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"delete-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Team",
+					"item": [
+						{
+							"name": "/api/Team/get-all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/get-all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"get-all"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/get-all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"get-all"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"teamId\": \"26e33107-fb3e-6466-4e2c-8292b7f14358\",\n \"name\": \"qui aute\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/Team/create-team",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamName\": \"<string>\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/create-team",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"create-team"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"teamName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/create-team",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"create-team"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Team/delete-team",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamId\": \"<uuid>\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/delete-team",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"delete-team"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"teamId\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/delete-team",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"delete-team"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Worker",
+					"item": [
+						{
+							"name": "/api/Worker/get-all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/get-all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"get-all"
+									],
+									"query": [
+										{
+											"key": "NameToSearch",
+											"value": "<string>",
+											"disabled": true
+										},
+										{
+											"key": "StatusId",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "TeamId",
+											"value": "<uuid>",
+											"disabled": true
+										},
+										{
+											"key": "RoleId",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "PageNumber",
+											"value": "<integer>",
+											"disabled": true
+										},
+										{
+											"key": "PageSize",
+											"value": "<integer>",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/get-all?NameToSearch=<string>&StatusId=<integer>&TeamId=<uuid>&RoleId=<integer>&PageNumber=<integer>&PageSize=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"get-all"
+											],
+											"query": [
+												{
+													"key": "NameToSearch",
+													"value": "<string>"
+												},
+												{
+													"key": "StatusId",
+													"value": "<integer>"
+												},
+												{
+													"key": "TeamId",
+													"value": "<uuid>"
+												},
+												{
+													"key": "RoleId",
+													"value": "<integer>"
+												},
+												{
+													"key": "PageNumber",
+													"value": "<integer>"
+												},
+												{
+													"key": "PageSize",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"workerId\": \"df497597-496e-63b1-2244-877e86424731\",\n \"firstName\": \"reprehenderit ut commodo\",\n \"lastName\": \"adipisicing dolor dolore\",\n \"email\": \"ullamco\",\n \"birthday\": \"1944-02-04T12:34:19.249Z\",\n \"photoUrl\": \"ut sint Excepteur\",\n \"statusId\": 38707395,\n \"statusName\": \"in minim\",\n \"roleId\": -47213231,\n \"role\": \"\",\n \"lastModificationTime\": \"2013-12-03T16:20:34.265Z\",\n \"isBirthdayToday\": false,\n \"teams\": [\n  {\n   \"teamId\": \"d9eadc63-25c8-76a1-251f-70e55b62b0fb\",\n   \"name\": \"quis aliquip qui deserunt\"\n  },\n  {\n   \"teamId\": \"urn:uuid:f96f712a-2bd1-ebc6-b9d6-569d961245eb\",\n   \"name\": \"sed sint\"\n  }\n ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/Worker/get-by-id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/get-by-id?WorkerId=<uuid>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"get-by-id"
+									],
+									"query": [
+										{
+											"key": "WorkerId",
+											"value": "<uuid>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/get-by-id?WorkerId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"get-by-id"
+											],
+											"query": [
+												{
+													"key": "WorkerId",
+													"value": "<uuid>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"workerId\": \"urn:uuid:d4f5657e-3af4-40be-dc1f-51917ff7d479\",\n \"firstName\": \"ex\",\n \"lastName\": \"eu nisi nostrud\",\n \"email\": \"quis dolore\",\n \"birthday\": \"1976-02-08T07:34:19.944Z\",\n \"photoUrl\": \"ipsum aliqua nisi dolore\",\n \"statusId\": 60709890,\n \"statusName\": \"labore Duis\",\n \"roleId\": -49225440,\n \"role\": \"ullamco f\",\n \"lastModificationTime\": \"1987-06-21T08:30:28.347Z\",\n \"isBirthdayToday\": true,\n \"teams\": [\n  {\n   \"teamId\": \"urn:uuid:48c255a0-d6c2-2b83-f527-f369b5286401\",\n   \"name\": \"consequat ad non\"\n  },\n  {\n   \"teamId\": \"urn:uuid:120f9be6-4fdd-eb9f-8876-70f2d63eb64f\",\n   \"name\": \"consequat labore al\"\n  }\n ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/Worker/update-status",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"workerId\": \"<uuid>\",\n    \"statusId\": \"<integer>\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/update-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"update-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workerId\": \"<uuid>\",\n    \"statusId\": \"<integer>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/update-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"update-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"irure\""
+								}
+							]
+						},
+						{
+							"name": "/api/Worker/create-worker",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/create-worker",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"create-worker"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/create-worker",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"create-worker"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "runner_data",
+			"item": [
+				{
+					"name": "Add: Status-Roles-Teams",
+					"item": [
+						{
+							"name": "/api/Role/create-role - PO",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Product Owner\",\n    \"roleAbbreviation\": \"PO\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - PM",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Project Manager\",\n    \"roleAbbreviation\": \"PM\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - TL",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Team Leader\",\n    \"roleAbbreviation\": \"TL\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - FD",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Frontend Developer\",\n    \"roleAbbreviation\": \"FD\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - BD",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Backeck Developer\",\n    \"roleAbbreviation\": \"BD\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - FS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Fullstack Developer\",\n    \"roleAbbreviation\": \"FS\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - QA",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Quality Assurance\",\n    \"roleAbbreviation\": \"QA\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - UX",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"User Experience\",\n    \"roleAbbreviation\": \"UX\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - FA",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Functional Analyst\",\n    \"roleAbbreviation\": \"FA\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - GD",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Graphic Designer\",\n    \"roleAbbreviation\": \"GD\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - HR",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Human Resources\",\n    \"roleAbbreviation\": \"HR\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Role/create-role - TS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"Technical Support\",\n    \"roleAbbreviation\": \"TS\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Role/create-role",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Role",
+										"create-role"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roleName\": \"<string>\",\n    \"roleAbbreviation\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Role/create-role",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Role",
+												"create-role"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Status/create-status - Active",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"statusName\": \"Active\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/create-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"create-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"statusName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/create-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"create-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Status/create-status - Inactive",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"statusName\": \"Inactive\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/create-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"create-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"statusName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/create-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"create-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Status/create-status - Pause",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"statusName\": \"Pause\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/create-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"create-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"statusName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/create-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"create-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Status/create-status - Vacations",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"statusName\": \"Vacations\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/create-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"create-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"statusName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/create-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"create-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Status/create-status - In a meeting",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"statusName\": \"In a meeting\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Status/create-status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Status",
+										"create-status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"statusName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Status/create-status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Status",
+												"create-status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Team/create-team - 01 Tokio",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamName\": \"Tokio\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/create-team",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"create-team"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"teamName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/create-team",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"create-team"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Team/create-team - 02 Vancouver",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamName\": \"Vancouver\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/create-team",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"create-team"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"teamName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/create-team",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"create-team"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Team/create-team - 03 Barcelona",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamName\": \"Barcelona\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/create-team",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"create-team"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"teamName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/create-team",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"create-team"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Add: Workers",
+					"item": [
+						{
+							"name": "/api/Worker/create-worker - W-01",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Mary\",\n    \"lastName\": \"Mcfarlane\",\n    \"email\": \"Mary@gmail.com\",\n    \"birthday\": \"1988-03-29T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=1\",\n    \"isActive\": true,\n    \"statusId\": 1,\n    \"roleId\": 1,\n    \"teamId\": [\n        {{team01}}\n    ]\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/create-worker",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"create-worker"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/create-worker",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"create-worker"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Worker/create-worker - W-02",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Sean\",\n    \"lastName\": \"Rasmussen\",\n    \"email\": \"Sean@gmail.com\",\n    \"birthday\": \"1970-02-15T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=8\",\n    \"isActive\": true,\n    \"statusId\": 1,\n    \"roleId\": 3,\n    \"teamId\": [\n        {{team02}}\n    ]\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/create-worker",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"create-worker"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/create-worker",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"create-worker"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Worker/create-worker - W-03",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Lexie\",\n    \"lastName\": \"Gordon\",\n    \"email\": \"Lexie@gmail.com\",\n    \"birthday\": \"1968-03-29T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=5\",\n    \"isActive\": true,\n    \"statusId\": 1,\n    \"roleId\": 6,\n    \"teamId\": [\n        {{team03}}\n    ]\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/create-worker",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"create-worker"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/create-worker",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"create-worker"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Worker/create-worker - W-04",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Tyrese\",\n    \"lastName\": \"Morris\",\n    \"email\": \"Tyrese@gmail.com\",\n    \"birthday\": \"1988-01-07T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=11\",\n    \"isActive\": true,\n    \"statusId\": 2,\n    \"roleId\": 7,\n    \"teamId\": [\n        {{team01}},\n        {{team03}}\n    ]\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/create-worker",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"create-worker"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/create-worker",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"create-worker"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "<Bearer Token>",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
