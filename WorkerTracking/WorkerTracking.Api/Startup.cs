@@ -72,6 +72,7 @@ namespace WorkerTracking.Api
             services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
             services.AddTransient<IWorkersByTeamRepository, WorkersByTeamRepository>();
         }
 

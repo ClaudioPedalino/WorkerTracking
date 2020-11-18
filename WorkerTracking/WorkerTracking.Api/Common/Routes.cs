@@ -39,6 +39,14 @@ namespace WorkerTracking.Api.Common
         public const string Delete_Team = "delete-team";
         #endregion
 
+        #region Location-Controller
+        public const string Get_All_Location = "get-all";
+        public const string Create_Location = "create-location";
+
+        #endregion
+
+
+
         #region HealthCheck-Controller
         public const string Live = "live";
         public const string Ready = "ready";

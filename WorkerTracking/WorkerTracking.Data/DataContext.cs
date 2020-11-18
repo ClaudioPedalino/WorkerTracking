@@ -18,6 +18,7 @@ namespace WorkerTracking.Data
         public DbSet<WorkersByTeam> WorkersByTeams { get; set; }
         public DbSet<Status> Status { get; set; }
 
+        public DbSet<Location> Location { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,7 +32,8 @@ namespace WorkerTracking.Data
             modelBuilder.ApplyConfiguration(new TeamsEntityConfiguration());
             modelBuilder.ApplyConfiguration(new StatusEntityConfiguration());
             modelBuilder.ApplyConfiguration(new WorkersByTeamEntityConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new LocationEntityConfiguration());
+
             SeedInitialData(modelBuilder);
             
         }
