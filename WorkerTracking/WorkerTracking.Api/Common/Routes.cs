@@ -7,6 +7,18 @@ namespace WorkerTracking.Api.Common
 {
     public static class Routes
     {
+        public const string Root = "api";
+        public const string Version = "v1";
+        public const string Base = Root + "/" + Version;
+
+        #region Identity
+        public static class Identity
+        {
+            public const string Login = Base + "/identity/login";
+            public const string Register = Base + "/identity/register";
+        }
+        #endregion
+
         #region Worker-Controller
         public const string Get_All_Workers = "get-all";
         public const string Get_Worker_By_Id = "get-by-id";

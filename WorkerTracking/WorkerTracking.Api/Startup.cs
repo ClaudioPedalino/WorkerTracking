@@ -1,16 +1,19 @@
 using EnumsNET;
 //using HealthChecks.UI.Client;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 //using Newtonsoft.Json;
 //using Newtonsoft.Json.Linq;
@@ -18,7 +21,9 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using WorkerTracking.Api.Auth;
 using WorkerTracking.Core.Common;
 using WorkerTracking.Core.Handlers;
 using WorkerTracking.Data;
@@ -40,11 +45,40 @@ namespace WorkerTracking.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<DataContext>();
 
             RegisterDatabase(services);
 
-            services.AddMediatR(typeof(GetAllWorkersQueryHandler).Assembly);
+            //auth
+            services.AddScoped<IIdentityService, IdentityService>();
+            var jwtSettings = new JwtSettings();
+            Configuration.Bind(nameof(jwtSettings), jwtSettings);
+            services.AddSingleton(jwtSettings);
 
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        RequireExpirationTime = false,
+                        ValidateLifetime = true
+                        //IssuerSigningKeyValidator = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings::Secret"]))
+                    };
+                });
+
+            services.AddMediatR(typeof(GetAllWorkersQueryHandler).Assembly);
             RegisterRepositories(services);
             RegisterLogging(services);
             RegisterSwagger(services);
@@ -53,7 +87,6 @@ namespace WorkerTracking.Api
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             #region TODO: fix health check
             //services.AddHealthChecks()

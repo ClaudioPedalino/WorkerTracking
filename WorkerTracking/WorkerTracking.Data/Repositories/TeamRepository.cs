@@ -28,7 +28,7 @@ namespace WorkerTracking.Data.Repositories
 
         public async Task CreateTeamAsync(Team entity)
         {
-            await _context.Teams.AddAsync(entity);
+            _context.Teams.Add(entity);
             await _context.SaveChangesAsync();
         }
 

@@ -46,12 +46,13 @@ namespace WorkerTracking.Api.Controllers
 
         [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Team)]
-        public async Task<IActionResult> CreateTeamAysnc([FromBody] CreateTeamCommand command)
+        public async Task<string> CreateTeamAysnc([FromBody] CreateTeamCommand command)
         {
             try
             {
                 var response = await _mediator.Send(command);
-                return Ok(response);
+                return "ok";
+                //return Ok(response);
             }
             catch (Exception ex)
             {
@@ -62,7 +63,7 @@ namespace WorkerTracking.Api.Controllers
         
         [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Team)]
-        public async Task<IActionResult> DeleteTeamAysnc([FromBody] DeleteTeamCommand command)
+        public async Task<ActionResult> DeleteTeamAysnc([FromBody] DeleteTeamCommand command)
         {
             try
             {
