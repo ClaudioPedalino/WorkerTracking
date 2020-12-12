@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WorkerTracking.Core.Queries;
+﻿using WorkerTracking.Core.Queries;
 
 namespace WorkerTracking.Core.Helpers
 {

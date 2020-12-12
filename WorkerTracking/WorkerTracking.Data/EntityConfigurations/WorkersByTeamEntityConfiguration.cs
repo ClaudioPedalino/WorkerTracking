@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using WorkerTracking.Entities;
 
 namespace WorkerTracking.Data.EntityConfigurations
@@ -18,7 +15,7 @@ namespace WorkerTracking.Data.EntityConfigurations
                 .ValueGeneratedOnAdd();
 
             builder.HasKey(e => e.WorkersByTeamId);
-            
+
             #region relations
 
             builder.HasMany<Team>()

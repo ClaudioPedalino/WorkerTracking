@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WorkerTracking.Core.Enums
+﻿namespace WorkerTracking.Core.Enums
 {
     public enum StatusEnum
     {

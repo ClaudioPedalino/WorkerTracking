@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
@@ -21,7 +18,7 @@ namespace WorkerTracking.Data.Repositories
         public async Task<IEnumerable<Status>> GetAllStatusAsync()
         {
             var res = _context.Status;
-            
+
             var result = await res.ToListAsync();
             return result;
         }
@@ -43,7 +40,7 @@ namespace WorkerTracking.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsBeingUsed(Status entity) 
+        public async Task<bool> IsBeingUsed(Status entity)
             => await _context.Workers.AnyAsync(x => x.StatusId == entity.StatusId);
     }
 }

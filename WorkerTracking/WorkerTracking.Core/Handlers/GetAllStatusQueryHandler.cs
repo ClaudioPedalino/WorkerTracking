@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Handlers.Models;
@@ -36,8 +34,8 @@ namespace WorkerTracking.Core.Handlers
             return statusList;
         }
 
-        private static bool HasResults(IEnumerable<Entities.Status> statusDb) 
-            => statusDb != null 
+        private static bool HasResults(IEnumerable<Entities.Status> statusDb)
+            => statusDb != null
             && statusDb.Count() > 0;
     }
 }

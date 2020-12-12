@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WorkerTracking.Api.Common
+﻿namespace WorkerTracking.Api.Common
 {
     public static class Routes
     {

@@ -1,7 +1,4 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Commands;
@@ -21,8 +18,8 @@ namespace WorkerTracking.Core.Handlers
         public async Task<string> Handle(DeleteStatusCommand command, CancellationToken cancellationToken)
         {
             var entity = await _satusRepository.GetStatusByIdAsync(command.StatusId);
-            if (entity == null) return "The requestes status id was not found in database"; 
-            
+            if (entity == null) return "The requestes status id was not found in database";
+
             bool isBeingUsed = await _satusRepository.IsBeingUsed(entity);
             if (isBeingUsed) return "Cannot be delete because some workers is using that state";
 

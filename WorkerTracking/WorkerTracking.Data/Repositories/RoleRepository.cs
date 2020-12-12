@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
@@ -39,6 +37,6 @@ namespace WorkerTracking.Data.Repositories
         }
 
         public async Task<bool> IsBeingUsed(Role entity)
-            => await _context.Workers.AnyAsync(x => x.RoleId== entity.RoleId);
+            => await _context.Workers.AnyAsync(x => x.RoleId == entity.RoleId);
     }
 }

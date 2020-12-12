@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Linq;
 using WorkerTracking.Data.EntityConfigurations;
 using WorkerTracking.Entities;
 
@@ -10,7 +7,7 @@ namespace WorkerTracking.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions options) : base(options) {}
+        public DataContext(DbContextOptions options) : base(options) { }
 
 
         public DbSet<Worker> Workers { get; set; }
@@ -33,9 +30,9 @@ namespace WorkerTracking.Data
             modelBuilder.ApplyConfiguration(new TeamsEntityConfiguration());
             modelBuilder.ApplyConfiguration(new StatusEntityConfiguration());
             modelBuilder.ApplyConfiguration(new WorkersByTeamEntityConfiguration());
-            
+
             SeedInitialData(modelBuilder);
-            
+
         }
 
         private void SeedInitialData(ModelBuilder modelBuilder)
@@ -49,7 +46,7 @@ namespace WorkerTracking.Data
                 new Status (104, "Vacations"),
                 new Status (105, "In a meeting")
             });
-            
+
             //modelBuilder.HasSequence<Status>("status_seq", schema : "public")
             //    .StartsAt(6);
 

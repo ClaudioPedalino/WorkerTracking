@@ -17,7 +17,7 @@ namespace WorkerTracking.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Worker>> GetAllWorkersAsync() 
+        public async Task<IEnumerable<Worker>> GetAllWorkersAsync()
             => await _context.Workers
                 .Where(x => x.IsActive)
                 .Include(x => x.Status)
@@ -26,7 +26,7 @@ namespace WorkerTracking.Data.Repositories
                     .ThenInclude(y => y.Team)
                 .ToListAsync();
 
-        public async Task<Worker> GetWorkerByIdAsync(Guid WorkerId) 
+        public async Task<Worker> GetWorkerByIdAsync(Guid WorkerId)
             => await _context.Workers
                 .Where(x => x.WorkerId == WorkerId)
                 .Include(x => x.Status)
@@ -39,7 +39,7 @@ namespace WorkerTracking.Data.Repositories
         {
             var workerDb = _context.Workers.Where(x => x.WorkerId == workerId).FirstOrDefault();
 
-            if (workerDb == null) 
+            if (workerDb == null)
                 return "Worker Not Found";
 
             workerDb.StatusId = statusId;

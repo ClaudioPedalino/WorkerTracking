@@ -1,5 +1,5 @@
 public enum BooleanEnum
 {
     True,
-    False    
+    False
 }

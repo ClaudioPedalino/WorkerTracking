@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WorkerTracking.Core.Common
+﻿namespace WorkerTracking.Core.Common
 {
     public class PaginationFilter
     {

@@ -12,7 +12,7 @@ using WorkerTracking.Data.Interfaces;
 
 namespace WorkerTracking.Core.Handlers
 {
-    public class GetAllWorkersQueryHandler : IRequestHandler<GetAllWorkersQuery, Tuple<IEnumerable<WorkerModel>,int>>
+    public class GetAllWorkersQueryHandler : IRequestHandler<GetAllWorkersQuery, Tuple<IEnumerable<WorkerModel>, int>>
     {
         private readonly IWorkerRepository _workerRepository;
 
@@ -33,7 +33,7 @@ namespace WorkerTracking.Core.Handlers
 
             return new Tuple<IEnumerable<WorkerModel>, int>(response
                 .Skip(PaginationHelper.GetSkipRows(request))
-                .Take(request.PageSize), 
+                .Take(request.PageSize),
                 workersDb.Count());
         }
 
@@ -87,12 +87,12 @@ namespace WorkerTracking.Core.Handlers
                     IsBirthdayToday = VerifyBirthday(DateTime.Now, w.Birthday), ///logica de sábados y domingos
                     Teams = w.WorkersByTeamId.Select(x => new TeamModel(x.Team.TeamId, x.Team.Name)).ToList()
                 }));
-            
+
             return response;
         }
 
 
-        private bool VerifyBirthday(DateTime date, DateTime birthday) 
+        private bool VerifyBirthday(DateTime date, DateTime birthday)
             => date.Date.ToString("dd-MM")
             .Equals(birthday.Date.ToString("dd-MM"));
     }

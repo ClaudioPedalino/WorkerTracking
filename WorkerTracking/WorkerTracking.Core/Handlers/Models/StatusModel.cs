@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WorkerTracking.Core.Handlers.Models
+﻿namespace WorkerTracking.Core.Handlers.Models
 {
     public class StatusModel
     {
