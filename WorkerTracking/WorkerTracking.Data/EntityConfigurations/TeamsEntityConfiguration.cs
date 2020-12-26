@@ -10,14 +10,18 @@ namespace WorkerTracking.Data.EntityConfigurations
         {
             builder.ToTable("Teams");
 
+            builder.HasAnnotation("Relational:TableName", "Teams");
+
+            builder.HasKey(e => e.TeamId);
+
             builder.Property(e => e.TeamId)
                 .HasAnnotation("Relational:ColumnName", "TeamId")
                 .ValueGeneratedOnAdd();
 
-            builder.HasKey(e => e.TeamId);
 
             builder.Property(x => x.Name)
-                .HasMaxLength(50)
+                .IsRequired()
+                .HasMaxLength(30)
                 .HasAnnotation("Relational:ColumnName", "Name");
         }
     }

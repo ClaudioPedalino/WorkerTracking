@@ -10,6 +10,6 @@ namespace WorkerTracking.Data.Interfaces
         Task<IEnumerable<Worker>> GetAllWorkersAsync();
         Task<Worker> GetWorkerByIdAsync(Guid WorkerId);
         Task CreateWorkerAsync(Worker entity);
-        Task<string> UpdateWorkerStatusAsync(Guid workerId, int statusId);
+        Task UpdateWorkerStatusAsync(Guid workerId, int statusId);
     }
 }

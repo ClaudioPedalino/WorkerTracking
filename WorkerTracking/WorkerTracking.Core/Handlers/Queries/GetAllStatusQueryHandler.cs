@@ -36,6 +36,6 @@ namespace WorkerTracking.Core.Handlers
 
         private static bool HasResults(IEnumerable<Entities.Status> statusDb)
             => statusDb != null
-            && statusDb.Count() > 0;
+            && statusDb.Any();
     }
 }

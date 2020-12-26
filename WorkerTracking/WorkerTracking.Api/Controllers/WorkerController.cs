@@ -42,58 +42,56 @@ namespace WorkerTracking.Api.Controllers
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Workers} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
 
         }
 
         [EnableCors("AllowOrigin")]
         [HttpGet(Routes.Get_Worker_By_Id)]
-        public async Task<WorkerModel> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
+        public async Task<ActionResult<WorkerModel>> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
         {
             try
             {
                 var response = await _mediator.Send(request);
-
-                return response;
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Workers} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
         [EnableCors("AllowOrigin")]
         [HttpPatch(Routes.Update_Worker_Status)]
-        public async Task<string> UpdateWorkerStatusAsync([FromBody] UpdateWorkerStatusCommand command)
+        public async Task<ActionResult> UpdateWorkerStatusAsync([FromBody] UpdateWorkerStatusCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
-
-                return response;
+                var response = await _mediator.Send(request);
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Update_Worker_Status} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
         [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Worker)]
-        public async Task<ActionResult> CreateWorkerAysnc([FromBody] CreateWorkerCommand command)
+        public async Task<ActionResult> CreateWorkerAysnc([FromBody] CreateWorkerCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Create_Worker} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 

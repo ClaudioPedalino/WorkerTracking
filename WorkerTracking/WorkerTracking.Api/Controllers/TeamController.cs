@@ -38,24 +38,23 @@ namespace WorkerTracking.Api.Controllers
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Teams} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
         [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Team)]
-        public async Task<string> CreateTeamAysnc([FromBody] CreateTeamCommand command)
+        public async Task<ActionResult> CreateTeamAysnc([FromBody] CreateTeamCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
-                return "ok";
-                //return Ok(response);
+                var response = await _mediator.Send(request);
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Create_Team} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
@@ -71,7 +70,7 @@ namespace WorkerTracking.Api.Controllers
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Create_Team} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
     }

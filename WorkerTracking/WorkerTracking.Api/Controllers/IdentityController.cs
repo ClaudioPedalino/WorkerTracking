@@ -17,7 +17,7 @@ namespace WorkerTracking.Api.Controllers
         }
 
         [HttpPost(Routes.Identity.Register)]
-        public async Task<IActionResult> Register([FromBody] UserRegistrationCommand command)
+        public async Task<IActionResult> Register([FromBody] UserRegistrationCommand request)
         {
             if (!ModelState.IsValid)
             {
@@ -27,7 +27,7 @@ namespace WorkerTracking.Api.Controllers
                 });
             }
 
-            var authResponse = await _identityService.RegisterAsync(command.Email, command.Password);
+            var authResponse = await _identityService.RegisterAsync(request.Email, request.Password);
 
             if (!authResponse.Success)
             {
@@ -44,9 +44,9 @@ namespace WorkerTracking.Api.Controllers
         }
 
         [HttpPost(Routes.Identity.Login)]
-        public async Task<IActionResult> Login([FromBody] UserLoginCommand command)
+        public async Task<IActionResult> Login([FromBody] UserLoginCommand request)
         {
-            var authResponse = await _identityService.LoginAsync(command.Email, command.Password);
+            var authResponse = await _identityService.LoginAsync(request.Email, request.Password);
 
             if (!authResponse.Success)
             {

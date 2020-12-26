@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using WorkerTracking.Api.Common;
 using WorkerTracking.Core.Commands;
+using WorkerTracking.Core.Commands.Base;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 
@@ -38,39 +39,39 @@ namespace WorkerTracking.Api.Controllers
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Roles} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
         [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Role)]
-        public async Task<ActionResult> CreateRoleAysnc([FromBody] CreateRoleCommand command)
+        public async Task<ActionResult<BaseCommandResponse>> CreateRoleAysnc([FromBody] CreateRoleCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Create_Role} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
         [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Role)]
-        public async Task<ActionResult> DeleteRoleAysnc([FromBody] DeleteRoleCommand command)
+        public async Task<ActionResult> DeleteRoleAysnc([FromBody] DeleteRoleCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Create_Role} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 

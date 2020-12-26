@@ -10,7 +10,7 @@ namespace WorkerTracking.Data.Repositories
 {
     public class TeamRepository : ITeamRepository
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public TeamRepository(DataContext context)
         {
@@ -18,7 +18,9 @@ namespace WorkerTracking.Data.Repositories
         }
 
         public async Task<IEnumerable<Team>> GetAllWorkersAsync()
-            => await _context.Teams.ToListAsync();
+            => await _context.Teams
+                             .OrderBy(x => x.Name)
+                             .ToListAsync();
 
         public async Task<Team> GetTeamByIdAsync(Guid teamId)
         => await _context.Teams
@@ -27,7 +29,7 @@ namespace WorkerTracking.Data.Repositories
 
         public async Task CreateTeamAsync(Team entity)
         {
-            _context.Teams.Add(entity);
+            await _context.Teams.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
@@ -37,9 +39,11 @@ namespace WorkerTracking.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        //public async Task<bool> IsBeingUsed(Team entity) :TODO
-        //{
-        //    return await _context.WorkersByTeams.AnyAsync(x => x.TeamId == entity.TeamId);
-        //}
+        public async Task<bool> IsBeingUsed(Guid teamId)
+        {
+            return await _context.WorkersByTeams
+                                 .Where(x => x.TeamId == teamId)
+                                 .AnyAsync(x => x.Worker.IsActive);
+        }
     }
 }

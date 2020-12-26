@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerTracking.Api", "WorkerTracking.Api\WorkerTracking.Api.csproj", "{64E764DB-6DC2-4174-BE5A-8FEDF4763153}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerTracking.Api", "WorkerTracking.Api\WorkerTracking.Api.csproj", "{64E764DB-6DC2-4174-BE5A-8FEDF4763153}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerTracking.Entities", "WorkerTracking.Entities\WorkerTracking.Entities.csproj", "{CD73DB12-9490-4146-AB1D-E3FC84CE5097}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerTracking.Entities", "WorkerTracking.Entities\WorkerTracking.Entities.csproj", "{CD73DB12-9490-4146-AB1D-E3FC84CE5097}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerTracking.Data", "WorkerTracking.Data\WorkerTracking.Data.csproj", "{3D193B73-1585-4EE8-AC47-A4BFF8D55E40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerTracking.Data", "WorkerTracking.Data\WorkerTracking.Data.csproj", "{3D193B73-1585-4EE8-AC47-A4BFF8D55E40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerTracking.Core", "WorkerTracking.Core\WorkerTracking.Core.csproj", "{71B27A69-6B48-48FF-9E1D-2E6EC6F11453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerTracking.Core", "WorkerTracking.Core\WorkerTracking.Core.csproj", "{71B27A69-6B48-48FF-9E1D-2E6EC6F11453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

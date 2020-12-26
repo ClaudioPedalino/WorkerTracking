@@ -10,11 +10,11 @@ namespace WorkerTracking.Entities
             TeamId = teamId;
         }
 
-        public Guid WorkersByTeamId { get; set; }
-        public Guid WorkerId { get; set; }
-        public Guid TeamId { get; set; }
+        public Guid WorkersByTeamId { get; private set; }
+        public Guid WorkerId { get; private set; }
+        public Guid TeamId { get; private set; }
 
-        public Team Team { get; set; }
-        public Worker Worker { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual Worker Worker { get; set; }
     }
 }

@@ -22,76 +22,94 @@ namespace WorkerTracking.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnName("id")
                         .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
+                        .HasColumnName("access_failed_count")
                         .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
+                        .HasColumnName("concurrency_stamp")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
+                        .HasColumnName("email")
                         .HasColumnType("text");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnName("email_confirmed")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("LockoutEnabled")
+                        .HasColumnName("lockout_enabled")
                         .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnName("lockout_end")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
+                        .HasColumnName("normalized_email")
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnName("normalized_user_name")
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
+                        .HasColumnName("password_hash")
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
+                        .HasColumnName("phone_number")
                         .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnName("phone_number_confirmed")
                         .HasColumnType("boolean");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnName("security_stamp")
                         .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnName("two_factor_enabled")
                         .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
+                        .HasColumnName("user_name")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_users");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.Role", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("RoleId")
+                        .HasColumnName("role_id")
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Abbreviation")
-                        .HasColumnName("Abbreviation")
-                        .HasColumnType("character varying(2)")
-                        .HasMaxLength(2);
+                        .HasColumnName("abbreviation")
+                        .HasColumnType("character varying(3)")
+                        .HasMaxLength(3);
 
                     b.Property<string>("Name")
-                        .HasColumnName("Name")
+                        .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(40)")
                         .HasMaxLength(40);
 
-                    b.HasKey("RoleId");
+                    b.HasKey("RoleId")
+                        .HasName("pk_roles");
 
-                    b.ToTable("Roles");
+                    b.ToTable("roles");
 
                     b.HasData(
                         new
@@ -122,7 +140,7 @@ namespace WorkerTracking.Data.Migrations
                         {
                             RoleId = 5005,
                             Abbreviation = "BD",
-                            Name = "Backeck Developer"
+                            Name = "Backend Developer"
                         },
                         new
                         {
@@ -172,28 +190,30 @@ namespace WorkerTracking.Data.Migrations
                 {
                     b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("StatusId")
+                        .HasColumnName("status_id")
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnName("Name")
+                        .IsRequired()
+                        .HasColumnName("name")
                         .HasColumnType("character varying(30)")
                         .HasMaxLength(30);
 
-                    b.HasKey("StatusId");
+                    b.HasKey("StatusId")
+                        .HasName("pk_status");
 
-                    b.ToTable("Status");
+                    b.ToTable("status");
 
                     b.HasData(
                         new
                         {
-                            StatusId = 101,
+                            StatusId = 100,
                             Name = "Active"
                         },
                         new
                         {
-                            StatusId = 102,
+                            StatusId = 101,
                             Name = "Inactive"
                         },
                         new
@@ -204,12 +224,12 @@ namespace WorkerTracking.Data.Migrations
                         new
                         {
                             StatusId = 104,
-                            Name = "Vacations"
+                            Name = "In a meeting"
                         },
                         new
                         {
                             StatusId = 105,
-                            Name = "In a meeting"
+                            Name = "Vacations"
                         });
                 });
 
@@ -217,104 +237,111 @@ namespace WorkerTracking.Data.Migrations
                 {
                     b.Property<Guid>("TeamId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("TeamId")
+                        .HasColumnName("team_id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
-                        .HasColumnName("Name")
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
+                        .IsRequired()
+                        .HasColumnName("name")
+                        .HasColumnType("character varying(30)")
+                        .HasMaxLength(30);
 
-                    b.HasKey("TeamId");
+                    b.HasKey("TeamId")
+                        .HasName("pk_teams");
 
-                    b.ToTable("Teams");
+                    b.ToTable("teams");
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.Worker", b =>
                 {
                     b.Property<Guid>("WorkerId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("WorkerId")
+                        .HasColumnName("worker_id")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Birthday")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Birthday")
+                        .HasColumnName("birthday")
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<string>("Email")
-                        .HasColumnName("Email")
-                        .HasColumnType("character varying(70)")
-                        .HasMaxLength(70);
+                        .IsRequired()
+                        .HasColumnName("email")
+                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("FirstName")
-                        .HasColumnName("FirstName")
+                        .IsRequired()
+                        .HasColumnName("first_name")
                         .HasColumnType("character varying(50)")
                         .HasMaxLength(50);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnName("IsActive")
-                        .HasColumnType("boolean");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("is_active")
+                        .HasColumnType("boolean")
+                        .HasDefaultValueSql("true");
 
                     b.Property<DateTime>("LastModificationTime")
+                        .HasColumnName("last_modification_time")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("LastName")
-                        .HasColumnName("LastName")
+                        .IsRequired()
+                        .HasColumnName("last_name")
                         .HasColumnType("character varying(50)")
                         .HasMaxLength(50);
 
                     b.Property<string>("PhotoUrl")
-                        .HasColumnName("PhotoUrl")
+                        .HasColumnName("photo_url")
                         .HasColumnType("text");
 
                     b.Property<int>("RoleId")
-                        .HasColumnName("RoleId")
+                        .HasColumnName("role_id")
                         .HasColumnType("integer");
 
                     b.Property<int>("StatusId")
-                        .HasColumnName("StatusId")
+                        .HasColumnName("status_id")
                         .HasColumnType("integer");
 
-                    b.HasKey("WorkerId");
+                    b.HasKey("WorkerId")
+                        .HasName("pk_workers");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId")
+                        .HasName("ix_workers_role_id");
 
-                    b.HasIndex("StatusId");
+                    b.HasIndex("StatusId")
+                        .HasName("ix_workers_status_id");
 
-                    b.ToTable("Workers");
+                    b.ToTable("workers");
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.WorkersByTeam", b =>
                 {
                     b.Property<Guid>("WorkersByTeamId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("WorkersByTeamId")
+                        .HasColumnName("workers_by_team_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("TeamId")
+                        .HasColumnName("team_id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("WorkerId")
+                        .HasColumnName("worker_id")
                         .HasColumnType("uuid");
 
-                    b.HasKey("WorkersByTeamId");
+                    b.HasKey("WorkersByTeamId")
+                        .HasName("pk_workers_by_teams");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("TeamId")
+                        .HasName("ix_workers_by_teams_team_id");
 
-                    b.HasIndex("WorkerId");
+                    b.HasIndex("WorkerId")
+                        .HasName("ix_workers_by_teams_worker_id");
 
-                    b.ToTable("WorkersByTeams");
-                });
-
-            modelBuilder.Entity("WorkerTracking.Entities.Team", b =>
-                {
-                    b.HasOne("WorkerTracking.Entities.WorkersByTeam", null)
-                        .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("workers_by_teams");
                 });
 
             modelBuilder.Entity("WorkerTracking.Entities.Worker", b =>
@@ -322,18 +349,14 @@ namespace WorkerTracking.Data.Migrations
                     b.HasOne("WorkerTracking.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_workers_roles_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WorkerTracking.Entities.Status", "Status")
                         .WithMany()
                         .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WorkerTracking.Entities.WorkersByTeam", null)
-                        .WithMany()
-                        .HasForeignKey("WorkerId")
+                        .HasConstraintName("fk_workers_status_status_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -341,14 +364,16 @@ namespace WorkerTracking.Data.Migrations
             modelBuilder.Entity("WorkerTracking.Entities.WorkersByTeam", b =>
                 {
                     b.HasOne("WorkerTracking.Entities.Team", "Team")
-                        .WithMany("WorkersByTeamId")
+                        .WithMany()
                         .HasForeignKey("TeamId")
+                        .HasConstraintName("fk_workers_by_teams_teams_team_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WorkerTracking.Entities.Worker", "Worker")
-                        .WithMany("WorkersByTeamId")
+                        .WithMany()
                         .HasForeignKey("WorkerId")
+                        .HasConstraintName("fk_workers_by_teams_workers_worker_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

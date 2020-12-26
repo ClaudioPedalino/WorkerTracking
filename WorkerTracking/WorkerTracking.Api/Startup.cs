@@ -1,4 +1,7 @@
-//using HealthChecks.UI.Client;
+///using HealthChecks.UI.Client;
+///using Newtonsoft.Json;
+///using Newtonsoft.Json.Linq;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -10,12 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-//using Newtonsoft.Json;
-//using Newtonsoft.Json.Linq;
 using Serilog;
 using System.Collections.Generic;
 using System.Text;
 using WorkerTracking.Api.Auth;
+using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Handlers;
 using WorkerTracking.Data;
 using WorkerTracking.Data.Interfaces;
@@ -32,17 +34,16 @@ namespace WorkerTracking.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateRoleCommand>());
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<DataContext>();
 
             RegisterDatabase(services);
 
-            //auth
             services.AddScoped<IIdentityService, IdentityService>();
             var jwtSettings = new JwtSettings();
             Configuration.Bind(nameof(jwtSettings), jwtSettings);
@@ -65,7 +66,7 @@ namespace WorkerTracking.Api
                         ValidateAudience = false,
                         RequireExpirationTime = false,
                         ValidateLifetime = true
-                        //IssuerSigningKeyValidator = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings::Secret"]))
+                        ///IssuerSigningKeyValidator = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings::Secret"]))
                     };
                 });
 
@@ -152,14 +153,13 @@ namespace WorkerTracking.Api
 
         private bool UsingLocalDb()
             => Configuration.GetSection("DataProvider:UsingLocalDb").Value.ToString().ToLower()
-                .Equals(BooleanEnum.True.ToString().ToLower());
+                .Equals(bool.TrueString.ToLower());
 
         private bool UsingPostgre()
             => Configuration.GetSection("DataProvider:UsingPostgre").Value.ToString().ToLower()
-                .Equals(BooleanEnum.True.ToString().ToLower());
+                .Equals(bool.TrueString.ToLower());
 
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

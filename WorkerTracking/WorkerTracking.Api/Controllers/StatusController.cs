@@ -37,39 +37,39 @@ namespace WorkerTracking.Api.Controllers
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Get_All_Status} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
         [EnableCors("AllowOrigin")]
         [HttpPost(Routes.Create_Status)]
-        public async Task<ActionResult> CreateStatusAysnc([FromBody] CreateStatusCommand command)
+        public async Task<ActionResult> CreateStatusAysnc([FromBody] CreateStatusCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Create_Status} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
 
         [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Status)]
-        public async Task<ActionResult> DeleteStatusAysnc([FromBody] DeleteStatusCommand command)
+        public async Task<ActionResult> DeleteStatusAysnc([FromBody] DeleteStatusCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, $"Operation failed into controller {Routes.Create_Status} with message: {ex.Message}");
-                return null;
+                return BadRequest(ex.Message);
             }
         }
     }

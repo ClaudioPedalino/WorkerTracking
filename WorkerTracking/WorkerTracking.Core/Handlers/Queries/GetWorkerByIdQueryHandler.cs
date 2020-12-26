@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Handlers.Models;
@@ -34,9 +33,8 @@ namespace WorkerTracking.Core.Handlers
                 Role = workerDb.Role.Name,
                 RoleId = workerDb.Role.RoleId,
                 LastModificationTime = workerDb.LastModificationTime,
-                //TODO:
-                //IsBirthdayToday = VerifyBirthday(DateTime.Now, workerDb.Birthday), ///logica de sábados y domingos
-                Teams = workerDb.WorkersByTeamId.Select(x => new TeamModel(x.Team.TeamId, x.Team.Name)).ToList()
+                //IsBirthdayToday = VerifyBirthday(DateTime.Now, workerDb.Birthday),
+                //Teams = workerDb.WorkersByTeamId.Select(x => new TeamModel(x.Team.TeamId, x.Team.Name)).ToList()
             };
 
             return response;

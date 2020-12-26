@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace WorkerTracking.Entities
 {
@@ -8,12 +7,10 @@ namespace WorkerTracking.Entities
         public Team(string name)
         {
             Name = name;
-            WorkersByTeamId = new List<WorkersByTeam>();
         }
 
-        public Guid TeamId { get; set; }
-        public string Name { get; set; }
+        public Guid TeamId { get; private set; }
+        public string Name { get; private set; }
 
-        public virtual List<WorkersByTeam> WorkersByTeamId { get; set; }
     }
 }

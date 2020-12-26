@@ -2,12 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Commands;
+using WorkerTracking.Core.Commands.Base;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
 
 namespace WorkerTracking.Core.Handlers
 {
-    public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, string>
+    public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, BaseCommandResponse>
     {
         private readonly IRoleRepository _roleRepository;
 
@@ -16,13 +17,13 @@ namespace WorkerTracking.Core.Handlers
             _roleRepository = roleRepository;
         }
 
-        public async Task<string> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
         {
-            var newRole = new Role(name: request.RoleName, abbreviation: request.RoleAbbreviation);
+            var newRole = new Role(request.RoleName, request.RoleAbbreviation.ToUpper());
 
             await _roleRepository.CreateRoleAsync(newRole);
 
-            return "Role created succesfully";
+            return new BaseCommandResponse($"Role {newRole.Name} created succesfully");
         }
     }
 }

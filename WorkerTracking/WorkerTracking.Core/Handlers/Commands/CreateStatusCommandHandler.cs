@@ -2,12 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Commands;
+using WorkerTracking.Core.Commands.Base;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
 
 namespace WorkerTracking.Core.Handlers
 {
-    public class CreateStatusCommandHandler : IRequestHandler<CreateStatusCommand, string>
+    public class CreateStatusCommandHandler : IRequestHandler<CreateStatusCommand, BaseCommandResponse>
     {
         private readonly IStatusRepository _statusRepository;
 
@@ -16,13 +17,13 @@ namespace WorkerTracking.Core.Handlers
             _statusRepository = statusRepository;
         }
 
-        public async Task<string> Handle(CreateStatusCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse> Handle(CreateStatusCommand request, CancellationToken cancellationToken)
         {
             var newStatus = new Status(name: request.StatusName);
 
             await _statusRepository.CreateStatusAsync(newStatus);
 
-            return "Status created succesfully";
+            return new BaseCommandResponse($"Status {newStatus.Name} created succesfully");
         }
     }
 }

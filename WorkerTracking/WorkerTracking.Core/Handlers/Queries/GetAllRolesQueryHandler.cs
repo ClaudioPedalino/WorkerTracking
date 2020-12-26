@@ -20,23 +20,15 @@ namespace WorkerTracking.Core.Handlers
 
         public async Task<List<RoleModel>> Handle(GetAllRolesQuery request, CancellationToken cancellationToken)
         {
-            var roleDb = await _roleRepository.GetAllRoleAsync();
-            var roleList = new List<RoleModel>();
+            var roleDb = await _roleRepository.GetAllRolesAsync();
 
-            if (HasResults(roleDb))
-            {
-                roleList.AddRange(
-                    roleDb.Select(x => new RoleModel(
-                                            roleId: x.RoleId,
-                                            roleName: x.Name,
-                                            abbreviation: x.Abbreviation)));
-            }
+            var result = roleDb.Select(x => new RoleModel(roleId: x.RoleId,
+                                                          roleName: x.Name,
+                                                          abbreviation: x.Abbreviation))
+                               .ToList();
 
-            return roleList;
+            return result;
         }
 
-        private static bool HasResults(IEnumerable<Entities.Role> roleDb)
-            => roleDb != null
-            && roleDb.Count() > 0;
     }
 }

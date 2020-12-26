@@ -9,19 +9,18 @@ namespace WorkerTracking.Data.Repositories
 {
     public class StatusRepository : IStatusRepository
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public StatusRepository(DataContext context)
         {
             _context = context;
         }
-        public async Task<IEnumerable<Status>> GetAllStatusAsync()
-        {
-            var res = _context.Status;
 
-            var result = await res.ToListAsync();
-            return result;
-        }
+
+        public async Task<IEnumerable<Status>> GetAllStatusAsync()
+            => await _context.Status
+                             .OrderBy(x => x.Name)
+                             .ToListAsync();
 
         public async Task<Status> GetStatusByIdAsync(int statusId)
             => await _context.Status
@@ -41,6 +40,7 @@ namespace WorkerTracking.Data.Repositories
         }
 
         public async Task<bool> IsBeingUsed(Status entity)
-            => await _context.Workers.AnyAsync(x => x.StatusId == entity.StatusId);
+            => await _context.Workers
+                             .AnyAsync(x => x.StatusId == entity.StatusId);
     }
 }

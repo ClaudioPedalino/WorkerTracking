@@ -14,6 +14,9 @@
 						{
 							"name": "/api/Role/get-all",
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -81,10 +84,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"roleTest\",\n    \"roleAbbreviation\": \"TST\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"roleTest\",\n    \"roleAbbreviation\": \"TST\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -155,10 +155,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleId\": 1\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleId\": 1\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/delete-role",
@@ -217,9 +214,7 @@
 								}
 							]
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Status",
@@ -294,10 +289,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"statusName\": \"StatusTest\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"statusName\": \"StatusTest\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Status/create-status",
@@ -368,10 +360,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"statusId\": \"<integer>\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"statusId\": 1\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Status/delete-status",
@@ -430,9 +419,7 @@
 								}
 							]
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Team",
@@ -507,10 +494,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"<string>\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"teamName\": \"<string>\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -581,10 +565,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamId\": \"<uuid>\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"teamId\": \"<uuid>\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/delete-team",
@@ -643,9 +624,7 @@
 								}
 							]
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Worker",
@@ -668,32 +647,32 @@
 									"query": [
 										{
 											"key": "NameToSearch",
-											"value": "<string>",
+											"value": "Ramon",
 											"disabled": true
 										},
 										{
 											"key": "StatusId",
-											"value": "<integer>",
+											"value": "100",
 											"disabled": true
 										},
 										{
 											"key": "TeamId",
-											"value": "<uuid>",
+											"value": "1",
 											"disabled": true
 										},
 										{
 											"key": "RoleId",
-											"value": "<integer>",
+											"value": "5005",
 											"disabled": true
 										},
 										{
 											"key": "PageNumber",
-											"value": "<integer>",
+											"value": "1",
 											"disabled": true
 										},
 										{
 											"key": "PageSize",
-											"value": "<integer>",
+											"value": "50",
 											"disabled": true
 										}
 									]
@@ -763,6 +742,83 @@
 									],
 									"cookie": [],
 									"body": "{\n \"workerId\": \"df497597-496e-63b1-2244-877e86424731\",\n \"firstName\": \"reprehenderit ut commodo\",\n \"lastName\": \"adipisicing dolor dolore\",\n \"email\": \"ullamco\",\n \"birthday\": \"1944-02-04T12:34:19.249Z\",\n \"photoUrl\": \"ut sint Excepteur\",\n \"statusId\": 38707395,\n \"statusName\": \"in minim\",\n \"roleId\": -47213231,\n \"role\": \"\",\n \"lastModificationTime\": \"2013-12-03T16:20:34.265Z\",\n \"isBirthdayToday\": false,\n \"teams\": [\n  {\n   \"teamId\": \"d9eadc63-25c8-76a1-251f-70e55b62b0fb\",\n   \"name\": \"quis aliquip qui deserunt\"\n  },\n  {\n   \"teamId\": \"urn:uuid:f96f712a-2bd1-ebc6-b9d6-569d961245eb\",\n   \"name\": \"sed sint\"\n  }\n ]\n}"
+								},
+								{
+									"name": "/api/Worker/get-all",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/get-all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"get-all"
+											],
+											"query": [
+												{
+													"key": "NameToSearch",
+													"value": "<string>",
+													"disabled": true
+												},
+												{
+													"key": "StatusId",
+													"value": "<integer>",
+													"disabled": true
+												},
+												{
+													"key": "TeamId",
+													"value": "<uuid>",
+													"disabled": true
+												},
+												{
+													"key": "RoleId",
+													"value": "<integer>",
+													"disabled": true
+												},
+												{
+													"key": "PageNumber",
+													"value": "<integer>",
+													"disabled": true
+												},
+												{
+													"key": "PageSize",
+													"value": "<integer>",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/10.0"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "ASP.NET"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 16 Nov 2020 03:08:08 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"pageNumber\": 1,\n    \"totalResults\": 12,\n    \"pageSize\": 25,\n    \"orderBy\": null,\n    \"data\": [\n        {\n            \"workerId\": \"2f27c644-70a8-4892-b09a-d40a1839316b\",\n            \"firstName\": \"Mary\",\n            \"lastName\": \"Mcfarlane\",\n            \"email\": \"Mary@gmail.com\",\n            \"birthday\": \"1988-03-29T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=1\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 1,\n            \"role\": \"Product Owner\",\n            \"lastModificationTime\": \"2020-11-16T00:08:02.8782323-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"ba7131c7-fb55-46cc-a728-1316ade88fcf\",\n                    \"name\": \"Tokio\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"e3541374-b11e-4ec5-b440-b8de0cd62cda\",\n            \"firstName\": \"Sean\",\n            \"lastName\": \"Rasmussen\",\n            \"email\": \"Sean@gmail.com\",\n            \"birthday\": \"1970-02-15T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=8\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 3,\n            \"role\": \"Team Leader\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.0123496-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"32b8d3ef-6724-41db-8254-55d0a9edea1b\",\n                    \"name\": \"Vancouver\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"05cfb378-deba-434f-b08e-07d5b49918e8\",\n            \"firstName\": \"Lexie\",\n            \"lastName\": \"Gordon\",\n            \"email\": \"Lexie@gmail.com\",\n            \"birthday\": \"1968-03-29T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=5\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 6,\n            \"role\": \"Fullstack Developer\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.0740497-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"924a336e-d682-4650-aecf-2ecd7b7de368\",\n                    \"name\": \"Barcelona\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"606ff967-43df-43cf-a21c-cb557feb9af2\",\n            \"firstName\": \"Tyrese\",\n            \"lastName\": \"Morris\",\n            \"email\": \"Tyrese@gmail.com\",\n            \"birthday\": \"1988-01-07T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=11\",\n            \"statusId\": 2,\n            \"statusName\": \"Inactive\",\n            \"roleId\": 7,\n            \"role\": \"Quality Assurance\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.152554-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"ba7131c7-fb55-46cc-a728-1316ade88fcf\",\n                    \"name\": \"Tokio\"\n                },\n                {\n                    \"teamId\": \"924a336e-d682-4650-aecf-2ecd7b7de368\",\n                    \"name\": \"Barcelona\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"083d07d1-5fad-42d3-8e77-e5d712dac6be\",\n            \"firstName\": \"Mary\",\n            \"lastName\": \"Mcfarlane\",\n            \"email\": \"Mary@gmail.com\",\n            \"birthday\": \"1988-03-29T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=1\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 1,\n            \"role\": \"Product Owner\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.2490476-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"ba7131c7-fb55-46cc-a728-1316ade88fcf\",\n                    \"name\": \"Tokio\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"8dad9c4e-f4d6-48a5-b314-f8e294d17e83\",\n            \"firstName\": \"Sean\",\n            \"lastName\": \"Rasmussen\",\n            \"email\": \"Sean@gmail.com\",\n            \"birthday\": \"1970-02-15T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=8\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 3,\n            \"role\": \"Team Leader\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.3412114-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"32b8d3ef-6724-41db-8254-55d0a9edea1b\",\n                    \"name\": \"Vancouver\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"ebf6c66a-9a86-457f-a9cb-8c69b3971dd1\",\n            \"firstName\": \"Lexie\",\n            \"lastName\": \"Gordon\",\n            \"email\": \"Lexie@gmail.com\",\n            \"birthday\": \"1968-03-29T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=5\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 6,\n            \"role\": \"Fullstack Developer\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.4348099-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"924a336e-d682-4650-aecf-2ecd7b7de368\",\n                    \"name\": \"Barcelona\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"3c42d88f-950c-4dde-8fe5-d387d9771a47\",\n            \"firstName\": \"Tyrese\",\n            \"lastName\": \"Morris\",\n            \"email\": \"Tyrese@gmail.com\",\n            \"birthday\": \"1988-01-07T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=11\",\n            \"statusId\": 2,\n            \"statusName\": \"Inactive\",\n            \"roleId\": 7,\n            \"role\": \"Quality Assurance\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.5300572-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"ba7131c7-fb55-46cc-a728-1316ade88fcf\",\n                    \"name\": \"Tokio\"\n                },\n                {\n                    \"teamId\": \"924a336e-d682-4650-aecf-2ecd7b7de368\",\n                    \"name\": \"Barcelona\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"1aaff5fa-6b7b-4a25-b499-6a8962eec6e9\",\n            \"firstName\": \"Mary\",\n            \"lastName\": \"Mcfarlane\",\n            \"email\": \"Mary@gmail.com\",\n            \"birthday\": \"1988-03-29T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=1\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 1,\n            \"role\": \"Product Owner\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.5933852-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"ba7131c7-fb55-46cc-a728-1316ade88fcf\",\n                    \"name\": \"Tokio\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"2e4bf5d4-4f63-41d6-8203-655c24e08736\",\n            \"firstName\": \"Sean\",\n            \"lastName\": \"Rasmussen\",\n            \"email\": \"Sean@gmail.com\",\n            \"birthday\": \"1970-02-15T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=8\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 3,\n            \"role\": \"Team Leader\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.6703508-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"32b8d3ef-6724-41db-8254-55d0a9edea1b\",\n                    \"name\": \"Vancouver\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"448906a8-5666-48ae-a084-6b176bc57977\",\n            \"firstName\": \"Lexie\",\n            \"lastName\": \"Gordon\",\n            \"email\": \"Lexie@gmail.com\",\n            \"birthday\": \"1968-03-29T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=5\",\n            \"statusId\": 1,\n            \"statusName\": \"Active\",\n            \"roleId\": 6,\n            \"role\": \"Fullstack Developer\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.734979-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"924a336e-d682-4650-aecf-2ecd7b7de368\",\n                    \"name\": \"Barcelona\"\n                }\n            ]\n        },\n        {\n            \"workerId\": \"f702b334-b051-4593-9e88-6eddba6ecd99\",\n            \"firstName\": \"Tyrese\",\n            \"lastName\": \"Morris\",\n            \"email\": \"Tyrese@gmail.com\",\n            \"birthday\": \"1988-01-07T13:34:00\",\n            \"photoUrl\": \"https://i.pravatar.cc/150?img=11\",\n            \"statusId\": 2,\n            \"statusName\": \"Inactive\",\n            \"roleId\": 7,\n            \"role\": \"Quality Assurance\",\n            \"lastModificationTime\": \"2020-11-16T00:08:03.7961187-03:00\",\n            \"isBirthdayToday\": false,\n            \"teams\": [\n                {\n                    \"teamId\": \"ba7131c7-fb55-46cc-a728-1316ade88fcf\",\n                    \"name\": \"Tokio\"\n                },\n                {\n                    \"teamId\": \"924a336e-d682-4650-aecf-2ecd7b7de368\",\n                    \"name\": \"Barcelona\"\n                }\n            ]\n        }\n    ]\n}"
 								}
 							]
 						},
@@ -848,10 +904,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"workerId\": \"<uuid>\",\n    \"statusId\": \"<integer>\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"workerId\": \"<uuid>\",\n    \"statusId\": \"<integer>\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Worker/update-status",
@@ -922,10 +975,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Worker/create-worker",
@@ -984,18 +1034,78 @@
 								}
 							]
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
+				},
+				{
+					"name": "Identity",
+					"item": [
+						{
+							"name": "_register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"bart@test.com\",\r\n  \"password\": \"yonofui\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/identity/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"identity",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "_login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"bart@test.com\",\r\n  \"password\": \"yonofui\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/identity/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"identity",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "runner_data",
 			"item": [
 				{
-					"name": "Add: Status-Roles-Teams",
+					"name": "Add: Roles",
 					"item": [
 						{
 							"name": "/api/Role/create-role - PO",
@@ -1009,10 +1119,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Product Owner\",\n    \"roleAbbreviation\": \"PO\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Product Owner\",\n    \"roleAbbreviation\": \"PO\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1083,10 +1190,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Project Manager\",\n    \"roleAbbreviation\": \"PM\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Project Manager\",\n    \"roleAbbreviation\": \"PM\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1157,10 +1261,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Team Leader\",\n    \"roleAbbreviation\": \"TL\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Team Leader\",\n    \"roleAbbreviation\": \"TL\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1231,10 +1332,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Frontend Developer\",\n    \"roleAbbreviation\": \"FD\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Frontend Developer\",\n    \"roleAbbreviation\": \"FD\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1305,10 +1403,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Backeck Developer\",\n    \"roleAbbreviation\": \"BD\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Backeck Developer\",\n    \"roleAbbreviation\": \"BD\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1379,10 +1474,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Fullstack Developer\",\n    \"roleAbbreviation\": \"FS\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Fullstack Developer\",\n    \"roleAbbreviation\": \"FS\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1453,10 +1545,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Quality Assurance\",\n    \"roleAbbreviation\": \"QA\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Quality Assurance\",\n    \"roleAbbreviation\": \"QA\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1527,10 +1616,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"User Experience\",\n    \"roleAbbreviation\": \"UX\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"User Experience\",\n    \"roleAbbreviation\": \"UX\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1601,10 +1687,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Functional Analyst\",\n    \"roleAbbreviation\": \"FA\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Functional Analyst\",\n    \"roleAbbreviation\": \"FA\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1675,10 +1758,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Graphic Designer\",\n    \"roleAbbreviation\": \"GD\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Graphic Designer\",\n    \"roleAbbreviation\": \"GD\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1749,10 +1829,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Human Resources\",\n    \"roleAbbreviation\": \"HR\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Human Resources\",\n    \"roleAbbreviation\": \"HR\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1823,10 +1900,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"Technical Support\",\n    \"roleAbbreviation\": \"TS\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"roleName\": \"Technical Support\",\n    \"roleAbbreviation\": \"TS\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -1884,7 +1958,12 @@
 									"body": ""
 								}
 							]
-						},
+						}
+					]
+				},
+				{
+					"name": "Add: Status",
+					"item": [
 						{
 							"name": "/api/Status/create-status - Active",
 							"request": {
@@ -1897,10 +1976,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"statusName\": \"Active\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"statusName\": \"Active\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Status/create-status",
@@ -1971,10 +2047,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"statusName\": \"Inactive\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"statusName\": \"Away\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Status/create-status",
@@ -2045,10 +2118,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"statusName\": \"Pause\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"statusName\": \"Pause\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Status/create-status",
@@ -2119,10 +2189,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"statusName\": \"Vacations\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"statusName\": \"Vacations\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Status/create-status",
@@ -2193,10 +2260,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"statusName\": \"In a meeting\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"statusName\": \"In a meeting\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Status/create-status",
@@ -2254,10 +2318,54 @@
 									"body": ""
 								}
 							]
-						},
+						}
+					]
+				},
+				{
+					"name": "Add: Teams",
+					"item": [
 						{
-							"name": "/api/Team/create-team - 01 Tokio",
+							"name": "/api/Team/create-team - random",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// let teams = pm.environment.get(\"Teams\");\r",
+											"\r",
+											"// if(!teams) {\r",
+											"//     let teams = ['Tokio','Paris','Madrid'];\r",
+											"// }\r",
+											"\r",
+											"// let currentTeamName = teams.shift();\r",
+											"\r",
+											"// pm.environment.set(\"teamName\", currentTeamName);\r",
+											"// pm.environment.set(\"teamsQuantity\", teams.lenght);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// var teams = pm.environment.get(\"teamsQuantity\");\r",
+											"\r",
+											"// if(teams && teams.length > 0)\r",
+											"// {\r",
+											"//     postman.setNextRequest(\"{{baseUrl}}/api/Team/create-team\")\r",
+											"// } else {\r",
+											"//     postman.setNextRequest(\"\")\r",
+											"// }"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -2267,10 +2375,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"Tokio\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"teamName\": \"{{$randomCity}}\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -2330,8 +2435,31 @@
 							]
 						},
 						{
-							"name": "/api/Team/create-team - 02 Vancouver",
+							"name": "/api/Team/create-team - [01] Tokio",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -2341,10 +2469,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"Vancouver\"\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"teamName\": \"Tokio\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -2404,8 +2529,31 @@
 							]
 						},
 						{
-							"name": "/api/Team/create-team - 03 Barcelona",
+							"name": "/api/Team/create-team - [02] Vancouver",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -2415,10 +2563,195 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"Barcelona\"\n}",
-									"options": {
-										"raw": {}
+									"raw": "{\n    \"teamName\": \"Vancouver\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/create-team",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"create-team"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"teamName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/create-team",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"create-team"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Team/create-team - [03] Madrid",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
 									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamName\": \"Madrid\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Team/create-team",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Team",
+										"create-team"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"teamName\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Team/create-team",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Team",
+												"create-team"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Team/create-team - [04] Paris",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamName\": \"Paris\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -2477,13 +2810,129 @@
 								}
 							]
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Add: Workers",
 					"item": [
+						{
+							"name": "/api/Worker/create-worker - W-00 - randm",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set('teams-ids', [\r",
+											"    pm.environment.get(\"team-01\"),\r",
+											"    pm.environment.get(\"team-02\"),\r",
+											"    pm.environment.get(\"team-03\"),\r",
+											"    pm.environment.get(\"team-04\")\r",
+											"]);\r",
+											"\r",
+											"function randomDate(start, end) {\r",
+											"    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));\r",
+											"}\r",
+											"\r",
+											"function getRandom(arr, n) {\r",
+											"    let result = new Array(n),\r",
+											"        len = arr.length,\r",
+											"        taken = new Array(len);\r",
+											"    if (n > len)\r",
+											"        throw new RangeError(\"getRandom: more elements taken than available\");\r",
+											"    while (n--) {\r",
+											"        var x = Math.floor(Math.random() * len);\r",
+											"        result[n] = arr[x in taken ? taken[x] : x];\r",
+											"        taken[x] = --len in taken ? taken[len] : len;\r",
+											"    }\r",
+											"    return result;\r",
+											"};\r",
+											"\r",
+											"\r",
+											"let arr = pm.environment.get(\"teams-ids\");\r",
+											"let n = _.random(1,4)\r",
+											"pm.environment.set('teams-selected', getRandom(arr,n));\r",
+											"\r",
+											"pm.environment.set('birthDate', randomDate(new Date(1970, 0, 1), new Date()));\r",
+											"\r",
+											"pm.environment.set('randomRoleStatusId', Math.floor(Math.random() * (5013 - 5001) + 5001));\r",
+											"\r",
+											"pm.environment.set('randomImageId', _.random(1,70));\r",
+											"pm.environment.set('photoUrl', \"https://i.pravatar.cc/150?img=\" + pm.environment.get(\"randomImageId\"));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"{{$randomFirstName}}\",\n    \"lastName\": \"{{$randomLastName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"birthday\": \"{{birthDate}}\",\n    \"photoUrl\": \"{{photoUrl}}\",\n    \"roleId\": {{randomRoleStatusId}},\n    \"teamId\":  [{{teams-selected}}]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Worker/create-worker",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Worker",
+										"create-worker"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Added as a part of security scheme: bearer",
+													"type": "text/plain"
+												},
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<dateTime>\",\n    \"photoUrl\": \"<string>\",\n    \"lastModificationTime\": \"<dateTime>\",\n    \"isActive\": \"<boolean>\",\n    \"statusId\": \"<integer>\",\n    \"roleId\": \"<integer>\",\n    \"teamId\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Worker/create-worker",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Worker",
+												"create-worker"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
 						{
 							"name": "/api/Worker/create-worker - W-01",
 							"request": {
@@ -2496,10 +2945,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"firstName\": \"Mary\",\n    \"lastName\": \"Mcfarlane\",\n    \"email\": \"Mary@gmail.com\",\n    \"birthday\": \"1988-03-29T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=1\",\n    \"isActive\": true,\n    \"statusId\": 1,\n    \"roleId\": 1,\n    \"teamId\": [\n        {{team01}}\n    ]\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"firstName\": \"Mary\",\n    \"lastName\": \"Mcfarlane\",\n    \"email\": \"Mary@gmail.com\",\n    \"birthday\": \"1988-03-29T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=1\",\n    \"roleId\": 5005,\n    \"teamId\": [\n        \"{{team-01}}\"\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Worker/create-worker",
@@ -2570,10 +3016,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"firstName\": \"Sean\",\n    \"lastName\": \"Rasmussen\",\n    \"email\": \"Sean@gmail.com\",\n    \"birthday\": \"1970-02-15T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=8\",\n    \"isActive\": true,\n    \"statusId\": 1,\n    \"roleId\": 3,\n    \"teamId\": [\n        {{team02}}\n    ]\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"firstName\": \"Sean\",\n    \"lastName\": \"Rasmussen\",\n    \"email\": \"Sean@gmail.com\",\n    \"birthday\": \"1970-02-15T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=8\",\n    \"roleId\": 5001,\n    \"teamId\": [\n        \"{{team-02}}\"\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Worker/create-worker",
@@ -2644,10 +3087,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"firstName\": \"Lexie\",\n    \"lastName\": \"Gordon\",\n    \"email\": \"Lexie@gmail.com\",\n    \"birthday\": \"1968-03-29T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=5\",\n    \"isActive\": true,\n    \"statusId\": 1,\n    \"roleId\": 6,\n    \"teamId\": [\n        {{team03}}\n    ]\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"firstName\": \"Lexie\",\n    \"lastName\": \"Gordon\",\n    \"email\": \"Lexie@gmail.com\",\n    \"birthday\": \"1968-03-29T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=5\",\n    \"roleId\": 5010,\n    \"teamId\": [\n        \"{{team-03}}\"\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Worker/create-worker",
@@ -2718,10 +3158,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"firstName\": \"Tyrese\",\n    \"lastName\": \"Morris\",\n    \"email\": \"Tyrese@gmail.com\",\n    \"birthday\": \"1988-01-07T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=11\",\n    \"isActive\": true,\n    \"statusId\": 2,\n    \"roleId\": 7,\n    \"teamId\": [\n        {{team01}},\n        {{team03}}\n    ]\n}",
-									"options": {
-										"raw": {}
-									}
+									"raw": "{\n    \"firstName\": \"Tyrese\",\n    \"lastName\": \"Morris\",\n    \"email\": \"Tyrese@gmail.com\",\n    \"birthday\": \"1988-01-07T13:34:00.000\",\n    \"photoUrl\": \"https://i.pravatar.cc/150?img=11\",\n    \"roleId\": 5006,\n    \"teamId\": [\n        \"{{team-01}}\",\n        \"{{team-03}}\"\n    ]\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Worker/create-worker",
@@ -2780,12 +3217,9 @@
 								}
 							]
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
 	"auth": {
@@ -2800,11 +3234,9 @@
 	},
 	"variable": [
 		{
-			"id": "baseUrl",
 			"key": "baseUrl",
 			"value": "/",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

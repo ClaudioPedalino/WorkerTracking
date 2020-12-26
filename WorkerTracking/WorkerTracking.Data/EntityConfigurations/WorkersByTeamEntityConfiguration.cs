@@ -16,17 +16,14 @@ namespace WorkerTracking.Data.EntityConfigurations
 
             builder.HasKey(e => e.WorkersByTeamId);
 
-            #region relations
-
-            builder.HasMany<Team>()
-                .WithOne()
+            builder.HasOne(x => x.Team)
+                .WithMany()
                 .HasForeignKey(x => x.TeamId);
 
-            builder.HasMany<Worker>()
-                .WithOne()
+            builder.HasOne(x => x.Worker)
+                .WithMany()
                 .HasForeignKey(x => x.WorkerId);
 
-            #endregion
         }
     }
 }

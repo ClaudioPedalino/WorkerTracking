@@ -9,20 +9,21 @@ namespace WorkerTracking.Data.Repositories
 {
     public class RoleRepository : IRoleRepository
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public RoleRepository(DataContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<Role>> GetAllRoleAsync()
-            => await _context.Roles.ToListAsync();
+        public async Task<IEnumerable<Role>> GetAllRolesAsync()
+            => await _context.Roles
+                             .OrderBy(x => x.Name)
+                             .ToListAsync();
 
         public async Task<Role> GetRoleByIdAsync(int RoleId)
             => await _context.Roles
-                .Where(x => x.RoleId == RoleId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(x => x.RoleId == RoleId);
 
         public async Task CreateRoleAsync(Role entity)
         {
@@ -37,6 +38,7 @@ namespace WorkerTracking.Data.Repositories
         }
 
         public async Task<bool> IsBeingUsed(Role entity)
-            => await _context.Workers.AnyAsync(x => x.RoleId == entity.RoleId);
+            => await _context.Workers
+                             .AnyAsync(x => x.RoleId == entity.RoleId);
     }
 }

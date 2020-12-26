@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace WorkerTracking.Entities
 {
@@ -19,7 +18,6 @@ namespace WorkerTracking.Entities
         public virtual Status Status { get; set; }
         public virtual Role Role { get; set; }
 
-        public virtual List<WorkersByTeam> WorkersByTeamId { get; set; }
 
     }
 }

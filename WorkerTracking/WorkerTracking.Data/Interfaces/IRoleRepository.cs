@@ -6,10 +6,10 @@ namespace WorkerTracking.Data.Interfaces
 {
     public interface IRoleRepository
     {
-        Task<IEnumerable<Role>> GetAllRoleAsync();
+        Task<IEnumerable<Role>> GetAllRolesAsync();
         Task<Role> GetRoleByIdAsync(int RoleId);
         Task CreateRoleAsync(Role entity);
-        Task DeleteRoleAsync(Role roleId);
+        Task DeleteRoleAsync(Role entity);
         Task<bool> IsBeingUsed(Role entity);
     }
 }
