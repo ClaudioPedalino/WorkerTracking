@@ -6,14 +6,14 @@ namespace WorkerTracking.Core.Commands
 {
     public class CreateTeamCommand : IRequest<BaseCommandResponse>
     {
-        public string TeamName { get; set; }
+        public string Name { get; set; }
     }
 
     public class CreateTeamCommandValidator : AbstractValidator<CreateTeamCommand>
     {
         public CreateTeamCommandValidator()
         {
-            RuleFor(x => x.TeamName)
+            RuleFor(x => x.Name)
                 .Cascade(CascadeMode.Stop)
                 .NotNull().WithMessage("{PropertyName} can not be null")
                 .NotEmpty().WithMessage("{PropertyName} can not be empty")

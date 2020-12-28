@@ -7,7 +7,7 @@ namespace WorkerTracking.Data.Interfaces
 {
     public interface ITeamRepository
     {
-        Task<IEnumerable<Team>> GetAllWorkersAsync();
+        Task<IEnumerable<Team>> GetAllTeamsAsync();
         Task<Team> GetTeamByIdAsync(Guid teamId);
 
         Task CreateTeamAsync(Team entity);

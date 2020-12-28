@@ -84,7 +84,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"roleTest\",\n    \"roleAbbreviation\": \"TST\"\n}"
+									"raw": "{\n    \"name\": \"roleTest\",\n    \"abbreviation\": \"TST\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Role/create-role",
@@ -153,12 +153,8 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"roleId\": 1\n}"
-								},
 								"url": {
-									"raw": "{{baseUrl}}/api/Role/delete-role",
+									"raw": "{{baseUrl}}/api/Role/delete-role?roleId=1",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -166,6 +162,12 @@
 										"api",
 										"Role",
 										"delete-role"
+									],
+									"query": [
+										{
+											"key": "roleId",
+											"value": "1"
+										}
 									]
 								}
 							},
@@ -358,12 +360,8 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"statusId\": 1\n}"
-								},
 								"url": {
-									"raw": "{{baseUrl}}/api/Status/delete-status",
+									"raw": "{{baseUrl}}/api/Status/delete-status?statusId=1",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -371,6 +369,12 @@
 										"api",
 										"Status",
 										"delete-status"
+									],
+									"query": [
+										{
+											"key": "statusId",
+											"value": "1"
+										}
 									]
 								}
 							},
@@ -494,7 +498,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"<string>\"\n}"
+									"raw": "{\n    \"name\": \"pepe\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -563,12 +567,8 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"teamId\": \"<uuid>\"\n}"
-								},
 								"url": {
-									"raw": "{{baseUrl}}/api/Team/delete-team",
+									"raw": "{{baseUrl}}/api/Team/delete-team?teamId=a1aeaa0e-2920-4d7b-83a0-79e2b144906e",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -576,6 +576,12 @@
 										"api",
 										"Team",
 										"delete-team"
+									],
+									"query": [
+										{
+											"key": "teamId",
+											"value": "a1aeaa0e-2920-4d7b-83a0-79e2b144906e"
+										}
 									]
 								}
 							},
@@ -635,7 +641,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/api/Worker/get-all",
+									"raw": "{{baseUrl}}/api/Worker/get-all?PageSize=50",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -672,8 +678,7 @@
 										},
 										{
 											"key": "PageSize",
-											"value": "50",
-											"disabled": true
+											"value": "50"
 										}
 									]
 								}
@@ -2375,7 +2380,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"{{$randomCity}}\"\n}"
+									"raw": "{\n    \"name\": \"{{$randomCity}}\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -2469,7 +2474,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"Tokio\"\n}"
+									"raw": "{\n    \"name\": \"Tokio\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -2563,7 +2568,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"Vancouver\"\n}"
+									"raw": "{\n    \"name\": \"Vancouver\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -2657,7 +2662,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"Madrid\"\n}"
+									"raw": "{\n    \"name\": \"Madrid\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",
@@ -2751,7 +2756,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"teamName\": \"Paris\"\n}"
+									"raw": "{\n    \"name\": \"Paris\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/api/Team/create-team",

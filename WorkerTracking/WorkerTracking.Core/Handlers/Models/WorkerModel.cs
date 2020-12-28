@@ -12,7 +12,7 @@ namespace WorkerTracking.Core.Handlers.Models
         public DateTime Birthday { get; set; }
         public string PhotoUrl { get; set; }
         public int StatusId { get; set; }
-        public string StatusName { get; set; }
+        public string Status { get; set; }
         public int RoleId { get; set; }
         public string Role { get; set; }
         public DateTime LastModificationTime { get; set; }

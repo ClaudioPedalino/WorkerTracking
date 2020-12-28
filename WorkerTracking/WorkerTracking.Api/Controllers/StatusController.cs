@@ -59,7 +59,7 @@ namespace WorkerTracking.Api.Controllers
 
         [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Status)]
-        public async Task<ActionResult> DeleteStatusAysnc([FromBody] DeleteStatusCommand request)
+        public async Task<ActionResult> DeleteStatusAysnc([FromQuery] DeleteStatusCommand request)
         {
             try
             {

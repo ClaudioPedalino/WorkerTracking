@@ -24,10 +24,10 @@ namespace WorkerTracking.Core.Handlers
 
             bool isBeingUsed = await _roleRepository.IsBeingUsed(entity);
             if (isBeingUsed)
-                return new BaseCommandResponse("Cannot be delete because some workers is using that state");
+                return new BaseCommandResponse("Cannot be delete because some workers is using that role");
 
             await _roleRepository.DeleteRoleAsync(entity);
-            return new BaseCommandResponse("Role deleted succesfully");
+            return new BaseCommandResponse($"Role {entity.Name} deleted succesfully");
         }
 
     }

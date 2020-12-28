@@ -61,7 +61,7 @@ namespace WorkerTracking.Api.Controllers
 
         [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Role)]
-        public async Task<ActionResult> DeleteRoleAysnc([FromBody] DeleteRoleCommand request)
+        public async Task<ActionResult> DeleteRoleAysnc([FromQuery] DeleteRoleCommand request)
         {
             try
             {

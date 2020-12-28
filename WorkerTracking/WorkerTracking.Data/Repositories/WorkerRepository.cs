@@ -22,8 +22,6 @@ namespace WorkerTracking.Data.Repositories
                 .Where(x => x.IsActive)
                 .Include(x => x.Status)
                 .Include(x => x.Role)
-                //.Include(x => x.WorkersByTeamId)
-                //    .ThenInclude(y => y.Team)
                 .OrderBy(x => x.FirstName)
                     .ThenBy(x => x.LastName)
                 .ToListAsync();
@@ -33,8 +31,6 @@ namespace WorkerTracking.Data.Repositories
                 .Where(x => x.WorkerId == WorkerId)
                 .Include(x => x.Status)
                 .Include(x => x.Role)
-                //.Include(x => x.WorkersByTeamId)
-                //    .ThenInclude(y => y.Team)
                 .FirstOrDefaultAsync();
 
         public async Task CreateWorkerAsync(Worker entity)

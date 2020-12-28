@@ -19,7 +19,7 @@ namespace WorkerTracking.Core.Handlers
 
         public async Task<BaseCommandResponse> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
         {
-            var newRole = new Role(request.RoleName, request.RoleAbbreviation.ToUpper());
+            var newRole = new Role(request.Name, request.Abbreviation.ToUpper());
 
             await _roleRepository.CreateRoleAsync(newRole);
 

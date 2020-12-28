@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
@@ -25,6 +26,12 @@ namespace WorkerTracking.Data.Repositories
                    .ToListAsync();
             return result;
         }
+
+        public async Task<IEnumerable<WorkersByTeam>> GetTotalWorkersByTeam()
+            => await _context.WorkersByTeams
+                             .Include(x => x.Team)
+                             .OrderBy(x => x.Team.Name)
+                             .ToListAsync();
 
         public async Task CreateWorkerByTeam(WorkersByTeam entity)
         {

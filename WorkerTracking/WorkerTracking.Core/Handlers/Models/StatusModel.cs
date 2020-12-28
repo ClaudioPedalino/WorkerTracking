@@ -8,7 +8,14 @@
             StatusName = statusName;
         }
 
+        public StatusModel(int statusId, int totalWorkers)
+        {
+            StatusId = statusId;
+            TotalWorkers = totalWorkers;
+        }
+
         public int StatusId { get; set; }
         public string StatusName { get; set; }
+        public int TotalWorkers { get; set; }
     }
 }

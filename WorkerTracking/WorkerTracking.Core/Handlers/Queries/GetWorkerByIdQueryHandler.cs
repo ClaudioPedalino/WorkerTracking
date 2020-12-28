@@ -28,7 +28,7 @@ namespace WorkerTracking.Core.Handlers
                 Email = workerDb.Email,
                 Birthday = workerDb.Birthday,
                 PhotoUrl = workerDb.PhotoUrl,
-                StatusName = workerDb.Status.Name,
+                Status = workerDb.Status.Name,
                 StatusId = workerDb.Status.StatusId,
                 Role = workerDb.Role.Name,
                 RoleId = workerDb.Role.RoleId,

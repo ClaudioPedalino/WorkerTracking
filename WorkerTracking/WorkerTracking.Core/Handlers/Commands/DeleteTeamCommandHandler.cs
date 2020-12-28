@@ -27,7 +27,7 @@ namespace WorkerTracking.Core.Handlers
                 return new BaseCommandResponse("Cannot delete because some workers is using that team");
 
             await _teamRepository.DeleteTeamAsync(teamDb);
-            return new BaseCommandResponse("Team deleted succesfully");
+            return new BaseCommandResponse($"Team {teamDb.Name} deleted succesfully");
         }
 
     }

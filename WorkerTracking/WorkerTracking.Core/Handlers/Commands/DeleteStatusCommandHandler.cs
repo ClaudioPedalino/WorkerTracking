@@ -20,14 +20,14 @@ namespace WorkerTracking.Core.Handlers
         {
             var entity = await _satusRepository.GetStatusByIdAsync(request.StatusId);
             if (entity == null)
-                return new BaseCommandResponse("The requestes status id was not found in database");
+                return new BaseCommandResponse("The requested status id was not found in database");
 
             bool isBeingUsed = await _satusRepository.IsBeingUsed(entity);
             if (isBeingUsed)
                 return new BaseCommandResponse("Cannot be delete because some workers is using that state");
 
             await _satusRepository.DeleteStatusAsync(entity);
-            return new BaseCommandResponse("Status deleted succesfully");
+            return new BaseCommandResponse($"Status {entity.Name} deleted succesfully");
         }
 
     }

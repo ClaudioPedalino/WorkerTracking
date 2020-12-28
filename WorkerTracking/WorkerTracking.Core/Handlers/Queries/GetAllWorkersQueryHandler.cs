@@ -37,7 +37,7 @@ namespace WorkerTracking.Core.Handlers
                                         Birthday = item.Birthday,
                                         PhotoUrl = item.PhotoUrl,
                                         StatusId = item.StatusId,
-                                        StatusName = item.Status.Name,
+                                        Status = item.Status.Name,
                                         RoleId = item.RoleId,
                                         Role = item.Role.Name,
                                         LastModificationTime = item.LastModificationTime,
@@ -73,15 +73,26 @@ namespace WorkerTracking.Core.Handlers
                 response = response.Where(x => x.RoleId == request.RoleId).ToList();
 
             if (request.TeamId.HasValue)
-            {
                 response = response.Where(x => x.Teams.Any(y => y.TeamId == request.TeamId.Value)).ToList();
-            }
 
             if (!string.IsNullOrWhiteSpace(request.NameToSearch))
             {
-                response = response.Where(x => EF.Functions.Like(x.FirstName, $"%{request.NameToSearch}%")
-                                            || EF.Functions.Like(x.LastName, $"%{request.NameToSearch}%"))
-                                   .ToList();
+                var searchWords = request.NameToSearch.Split(' ')
+                                                .Select(tag => tag.Trim())
+                                                .Where(tag => !string.IsNullOrEmpty(tag));
+                if (searchWords.Count() > 1)
+                {
+                    var fullKeyword = string.Concat(searchWords);
+                    response = response.Where(x => EF.Functions.Like(string.Concat(x.FirstName, x.LastName), $"%{fullKeyword}%"))
+                                       .ToList();
+                }
+                else
+                {
+                    response = response.Where(x => EF.Functions.Like(x.FirstName, $"%{request.NameToSearch.Trim()}%")
+                                                || EF.Functions.Like(x.LastName, $"%{request.NameToSearch.Trim()}%"))
+                                       .ToList();
+
+                }
             }
 
             return response;

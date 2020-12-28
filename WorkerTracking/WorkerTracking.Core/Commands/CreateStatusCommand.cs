@@ -6,14 +6,14 @@ namespace WorkerTracking.Core.Commands
 {
     public class CreateStatusCommand : IRequest<BaseCommandResponse>
     {
-        public string StatusName { get; set; }
+        public string Name { get; set; }
     }
 
     public class CreateStatusCommandValidator : AbstractValidator<CreateStatusCommand>
     {
         public CreateStatusCommandValidator()
         {
-            RuleFor(x => x.StatusName)
+            RuleFor(x => x.Name)
                 .Cascade(CascadeMode.Stop)
                 .NotNull().WithMessage("{PropertyName} can not be null")
                 .NotEmpty().WithMessage("{PropertyName} can not be empty")

@@ -19,7 +19,7 @@ namespace WorkerTracking.Core.Handlers
 
         public async Task<BaseCommandResponse> Handle(CreateStatusCommand request, CancellationToken cancellationToken)
         {
-            var newStatus = new Status(name: request.StatusName);
+            var newStatus = new Status(name: request.Name);
 
             await _statusRepository.CreateStatusAsync(newStatus);
 

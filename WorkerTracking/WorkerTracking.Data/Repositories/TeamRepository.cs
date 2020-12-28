@@ -17,7 +17,7 @@ namespace WorkerTracking.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Team>> GetAllWorkersAsync()
+        public async Task<IEnumerable<Team>> GetAllTeamsAsync()
             => await _context.Teams
                              .OrderBy(x => x.Name)
                              .ToListAsync();

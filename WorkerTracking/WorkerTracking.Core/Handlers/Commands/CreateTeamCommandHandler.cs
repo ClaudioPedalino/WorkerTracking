@@ -19,7 +19,7 @@ namespace WorkerTracking.Core.Handlers
 
         public async Task<BaseCommandResponse> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
         {
-            var newTeam = new Team(name: request.TeamName);
+            var newTeam = new Team(name: request.Name);
 
             await _teamRepository.CreateTeamAsync(newTeam);
 

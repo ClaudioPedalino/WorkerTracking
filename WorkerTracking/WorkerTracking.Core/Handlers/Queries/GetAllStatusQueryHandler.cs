@@ -12,30 +12,37 @@ namespace WorkerTracking.Core.Handlers
     public class GetAllStatusQueryHandler : IRequestHandler<GetAllStatusQuery, List<StatusModel>>
     {
         private readonly IStatusRepository _statusRepository;
+        private readonly IWorkerRepository _workerRepository;
 
-        public GetAllStatusQueryHandler(IStatusRepository statusRepository)
+        public GetAllStatusQueryHandler(IStatusRepository statusRepository,
+                                        IWorkerRepository workerRepository)
         {
-            _statusRepository = statusRepository;
+            _statusRepository = statusRepository ?? throw new System.ArgumentNullException(nameof(statusRepository));
+            _workerRepository = workerRepository ?? throw new System.ArgumentNullException(nameof(workerRepository));
         }
 
         public async Task<List<StatusModel>> Handle(GetAllStatusQuery request, CancellationToken cancellationToken)
         {
             var statusDb = await _statusRepository.GetAllStatusAsync();
-            var statusList = new List<StatusModel>();
+            var workersDb = await _workerRepository.GetAllWorkersAsync();
 
-            if (HasResults(statusDb))
-            {
-                statusList.AddRange(
-                    statusDb.Select(x => new StatusModel(
-                                            statusId: x.StatusId,
-                                            statusName: x.Name)));
-            }
+            var groupByStatusId = workersDb
+                                    .GroupBy(x => x.Status)
+                                    .Select(w => new StatusModel(w.Key.StatusId, w.Count())
+                                    );
 
-            return statusList;
+            var response = statusDb.Select(x =>
+                                    new StatusModel(statusId: x.StatusId,
+                                                    statusName: x.Name)
+                                    {
+                                        TotalWorkers = groupByStatusId.Any(y => y.StatusId == x.StatusId)
+                                                        ? groupByStatusId.Where(y => y.StatusId == x.StatusId).Select(y => y.TotalWorkers).FirstOrDefault()
+                                                        : 0
+                                    })
+                                    .ToList();
+
+            return response;
         }
 
-        private static bool HasResults(IEnumerable<Entities.Status> statusDb)
-            => statusDb != null
-            && statusDb.Any();
     }
 }

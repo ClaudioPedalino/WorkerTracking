@@ -6,21 +6,21 @@ namespace WorkerTracking.Core.Commands
 {
     public class CreateRoleCommand : IRequest<BaseCommandResponse>
     {
-        public string RoleName { get; set; }
-        public string RoleAbbreviation { get; set; }
+        public string Name { get; set; }
+        public string Abbreviation { get; set; }
     }
 
     public class CreateRoleCommandValidator : AbstractValidator<CreateRoleCommand>
     {
         public CreateRoleCommandValidator()
         {
-            RuleFor(x => x.RoleName)
+            RuleFor(x => x.Name)
                 .Cascade(CascadeMode.Stop)
                 .NotNull().WithMessage("{PropertyName} can not be null")
                 .NotEmpty().WithMessage("{PropertyName} can not be empty")
                 .MaximumLength(30).WithMessage("{PropertyName} can not be more than 30 characters");
 
-            RuleFor(x => x.RoleAbbreviation)
+            RuleFor(x => x.Abbreviation)
                 .Cascade(CascadeMode.Stop)
                 .NotNull().WithMessage("{PropertyName} can not be null")
                 .NotEmpty().WithMessage("{PropertyName} can not be empty")

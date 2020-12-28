@@ -60,7 +60,7 @@ namespace WorkerTracking.Api.Controllers
 
         [EnableCors("AllowOrigin")]
         [HttpDelete(Routes.Delete_Team)]
-        public async Task<ActionResult> DeleteTeamAysnc([FromBody] DeleteTeamCommand command)
+        public async Task<ActionResult> DeleteTeamAysnc([FromQuery] DeleteTeamCommand command)
         {
             try
             {
