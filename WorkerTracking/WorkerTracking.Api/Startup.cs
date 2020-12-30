@@ -6,7 +6,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +21,7 @@ using WorkerTracking.Core.Handlers;
 using WorkerTracking.Data;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Data.Repositories;
+using WorkerTracking.Entities;
 
 namespace WorkerTracking.Api
 {
@@ -39,7 +39,7 @@ namespace WorkerTracking.Api
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateRoleCommand>());
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<DataContext>();
 
             RegisterDatabase(services);

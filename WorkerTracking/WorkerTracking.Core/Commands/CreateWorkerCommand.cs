@@ -3,10 +3,11 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using WorkerTracking.Core.Commands.Base;
+using WorkerTracking.Core.Identity;
 
 namespace WorkerTracking.Core.Commands
 {
-    public class CreateWorkerCommand : IRequest<BaseCommandResponse>
+    public class CreateWorkerCommand : LoggedRequest, IRequest<BaseCommandResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

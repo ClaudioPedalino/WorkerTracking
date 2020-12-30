@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace WorkerTracking.Core.Handlers
 {
     public class CreateWorkerCommandHandler : IRequestHandler<CreateWorkerCommand, BaseCommandResponse>
     {
+        private readonly IUserStore<User> userStore;
         private readonly IWorkerRepository _workerRepository;
         private readonly ITeamRepository _teamRepository;
         private readonly IWorkersByTeamRepository _workersByTeamRepository;
@@ -25,6 +27,10 @@ namespace WorkerTracking.Core.Handlers
 
         public async Task<BaseCommandResponse> Handle(CreateWorkerCommand request, CancellationToken cancellationToken)
         {
+            var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
+            if (user == null) throw new ArgumentNullException("User does not exists");
+            if (user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
+
             var validRole = RolesEnum.IsDefined(typeof(RolesEnum), request.RoleId);
             if (!validRole)
                 return new BaseCommandResponse("That role does not exist");

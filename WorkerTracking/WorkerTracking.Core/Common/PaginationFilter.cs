@@ -1,6 +1,8 @@
-﻿namespace WorkerTracking.Core.Common
+﻿using WorkerTracking.Core.Identity;
+
+namespace WorkerTracking.Core.Common
 {
-    public class PaginationFilter
+    public class PaginationFilter : LoggedRequest
     {
         public PaginationFilter()
         {

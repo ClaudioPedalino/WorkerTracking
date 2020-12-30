@@ -2,10 +2,11 @@
 using MediatR;
 using System;
 using WorkerTracking.Core.Commands.Base;
+using WorkerTracking.Core.Identity;
 
 namespace WorkerTracking.Core.Commands
 {
-    public class UpdateWorkerStatusCommand : IRequest<BaseCommandResponse>
+    public class UpdateWorkerStatusCommand : LoggedRequest, IRequest<BaseCommandResponse>
     {
         public Guid WorkerId { get; set; }
         public int StatusId { get; set; }

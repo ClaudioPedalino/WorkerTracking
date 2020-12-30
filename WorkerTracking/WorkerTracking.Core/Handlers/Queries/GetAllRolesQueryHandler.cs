@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -6,23 +8,30 @@ using System.Threading.Tasks;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 using WorkerTracking.Data.Interfaces;
+using WorkerTracking.Entities;
 
 namespace WorkerTracking.Core.Handlers
 {
     public class GetAllRolesQueryHandler : IRequestHandler<GetAllRolesQuery, List<RoleModel>>
     {
+        private readonly IUserStore<User> userStore;
         private readonly IRoleRepository _roleRepository;
         private readonly IWorkerRepository _workerRepository;
 
         public GetAllRolesQueryHandler(IRoleRepository roleRepository,
-                                       IWorkerRepository workerRepository)
+                                       IWorkerRepository workerRepository, IUserStore<User> userStore)
         {
             _roleRepository = roleRepository ?? throw new System.ArgumentNullException(nameof(roleRepository));
             _workerRepository = workerRepository ?? throw new System.ArgumentNullException(nameof(workerRepository));
+            this.userStore = userStore;
         }
 
         public async Task<List<RoleModel>> Handle(GetAllRolesQuery request, CancellationToken cancellationToken)
         {
+            var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
+            if (user == null) throw new ArgumentNullException("User does not exists");
+            if (user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
+
             var roleDb = await _roleRepository.GetAllRolesAsync();
             var workersDb = await _workerRepository.GetAllWorkersAsync();
 

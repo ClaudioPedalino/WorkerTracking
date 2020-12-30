@@ -1,9 +1,11 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
 using System.Threading.Tasks;
+using WorkerTracking.Api.Auth;
 using WorkerTracking.Api.Common;
 using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Commands.Base;
@@ -14,6 +16,7 @@ using WorkerTracking.Core.Queries;
 
 namespace WorkerTracking.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class RoleController : ControllerBase
@@ -27,13 +30,14 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpGet(Routes.Get_All_Roles)]
-        public async Task<ActionResult<RoleModel>> GetAllRoleAsync()
+        public async Task<ActionResult<RoleModel>> GetAllRoleAsync([FromQuery] GetAllRolesQuery request)
         {
             try
             {
-                var response = await _mediator.Send(new GetAllRolesQuery());
+                request.SetUser(User.GetUserId());
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -43,12 +47,13 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpPost(Routes.Create_Role)]
         public async Task<ActionResult<BaseCommandResponse>> CreateRoleAysnc([FromBody] CreateRoleCommand request)
         {
             try
             {
+                request.SetUser(User.GetUserId());
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }
@@ -59,12 +64,13 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpDelete(Routes.Delete_Role)]
         public async Task<ActionResult> DeleteRoleAysnc([FromQuery] DeleteRoleCommand request)
         {
             try
             {
+                request.SetUser(User.GetUserId());
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }

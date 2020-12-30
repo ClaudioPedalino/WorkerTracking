@@ -1,18 +1,20 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
 using System.Threading.Tasks;
+using WorkerTracking.Api.Auth;
 using WorkerTracking.Api.Common;
 using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WorkerTracking.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class TeamController : ControllerBase
@@ -26,13 +28,14 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpGet(Routes.Get_All_Teams)]
-        public async Task<ActionResult<TeamModel>> GetAllTeamAsync()
+        public async Task<ActionResult<TeamModel>> GetAllTeamAsync([FromQuery] GetAllTeamQuery request)
         {
             try
             {
-                var response = await _mediator.Send(new GetAllTeamQuery());
+                request.SetUser(User.GetUserId());
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -42,12 +45,13 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpPost(Routes.Create_Team)]
         public async Task<ActionResult> CreateTeamAysnc([FromBody] CreateTeamCommand request)
         {
             try
             {
+                request.SetUser(User.GetUserId());
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }
@@ -58,13 +62,14 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpDelete(Routes.Delete_Team)]
-        public async Task<ActionResult> DeleteTeamAysnc([FromQuery] DeleteTeamCommand command)
+        public async Task<ActionResult> DeleteTeamAysnc([FromQuery] DeleteTeamCommand request)
         {
             try
             {
-                var response = await _mediator.Send(command);
+                request.SetUser(User.GetUserId());
+                var response = await _mediator.Send(request);
                 return Ok(response);
             }
             catch (Exception ex)

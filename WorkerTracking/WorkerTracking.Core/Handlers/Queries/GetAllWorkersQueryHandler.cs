@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,20 +10,26 @@ using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Helpers;
 using WorkerTracking.Core.Queries;
 using WorkerTracking.Data.Interfaces;
+using WorkerTracking.Entities;
 
 namespace WorkerTracking.Core.Handlers
 {
     public class GetAllWorkersQueryHandler : IRequestHandler<GetAllWorkersQuery, Tuple<IEnumerable<WorkerModel>, int>>
     {
+        private readonly IUserStore<User> userStore;
         private readonly IWorkersByTeamRepository _workersByTeamRepository;
 
-        public GetAllWorkersQueryHandler(IWorkersByTeamRepository workersByTeamRepository)
+        public GetAllWorkersQueryHandler(IWorkersByTeamRepository workersByTeamRepository, IUserStore<User> userStore)
         {
             _workersByTeamRepository = workersByTeamRepository;
+            this.userStore = userStore;
         }
 
         public async Task<Tuple<IEnumerable<WorkerModel>, int>> Handle(GetAllWorkersQuery request, CancellationToken cancellationToken)
         {
+            var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
+            if (user == null) throw new ArgumentNullException("User does not exists");
+
             var workersByTeamDb = await _workersByTeamRepository.GetAllWorkersWithTeamInfo();
 
             var response = workersByTeamDb

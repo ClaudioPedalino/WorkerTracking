@@ -1,23 +1,31 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 using WorkerTracking.Data.Interfaces;
+using WorkerTracking.Entities;
 
 namespace WorkerTracking.Core.Handlers
 {
     public class GetWorkerByIdQueryHandler : IRequestHandler<GetWorkerByIdQuery, WorkerModel>
     {
+        private readonly IUserStore<User> userStore;
         private readonly IWorkerRepository _workerRepository;
 
-        public GetWorkerByIdQueryHandler(IWorkerRepository workerRepository)
+        public GetWorkerByIdQueryHandler(IWorkerRepository workerRepository, IUserStore<User> userStore)
         {
             _workerRepository = workerRepository;
+            this.userStore = userStore;
         }
 
         public async Task<WorkerModel> Handle(GetWorkerByIdQuery request, CancellationToken cancellationToken)
         {
+            var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
+            if (user == null) throw new ArgumentNullException("User does not exists");
+
             var workerDb = await _workerRepository.GetWorkerByIdAsync(request.WorkerId);
 
             var response = new WorkerModel()

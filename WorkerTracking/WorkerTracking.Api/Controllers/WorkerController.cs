@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
@@ -12,6 +13,7 @@ using WorkerTracking.Core.Queries;
 
 namespace WorkerTracking.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class WorkerController : ControllerBase
@@ -25,7 +27,7 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpGet(Routes.Get_All_Workers)]
         public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkersQuery request)
         {
@@ -47,7 +49,7 @@ namespace WorkerTracking.Api.Controllers
 
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpGet(Routes.Get_Worker_By_Id)]
         public async Task<ActionResult<WorkerModel>> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
         {
@@ -63,7 +65,7 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpPatch(Routes.Update_Worker_Status)]
         public async Task<ActionResult> UpdateWorkerStatusAsync([FromBody] UpdateWorkerStatusCommand request)
         {
@@ -79,7 +81,7 @@ namespace WorkerTracking.Api.Controllers
             }
         }
 
-        [EnableCors("AllowOrigin")]
+        [Authorize]
         [HttpPost(Routes.Create_Worker)]
         public async Task<ActionResult> CreateWorkerAysnc([FromBody] CreateWorkerCommand request)
         {

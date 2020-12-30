@@ -2,10 +2,11 @@
 using MediatR;
 using System;
 using WorkerTracking.Core.Commands.Base;
+using WorkerTracking.Core.Identity;
 
 namespace WorkerTracking.Core.Commands
 {
-    public class DeleteTeamCommand : IRequest<BaseCommandResponse>
+    public class DeleteTeamCommand : LoggedRequest, IRequest<BaseCommandResponse>
     {
         public Guid TeamId { get; set; }
     }

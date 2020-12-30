@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
 using WorkerTracking.Core.Commands.Base;
+using WorkerTracking.Core.Identity;
 
 namespace WorkerTracking.Core.Commands
 {
-    public class CreateTeamCommand : IRequest<BaseCommandResponse>
+    public class CreateTeamCommand : LoggedRequest, IRequest<BaseCommandResponse>
     {
         public string Name { get; set; }
     }

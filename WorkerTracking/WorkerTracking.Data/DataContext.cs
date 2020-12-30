@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WorkerTracking.Core.Enums;
 using WorkerTracking.Data.EntityConfigurations;
 using WorkerTracking.Entities;
@@ -16,7 +15,7 @@ namespace WorkerTracking.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<WorkersByTeam> WorkersByTeams { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet<IdentityUser> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

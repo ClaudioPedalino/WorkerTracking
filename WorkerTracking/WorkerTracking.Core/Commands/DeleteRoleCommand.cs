@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
 using WorkerTracking.Core.Commands.Base;
+using WorkerTracking.Core.Identity;
 
 namespace WorkerTracking.Core.Commands
 {
-    public class DeleteRoleCommand : IRequest<BaseCommandResponse>
+    public class DeleteRoleCommand : LoggedRequest, IRequest<BaseCommandResponse>
     {
         public int RoleId { get; set; }
     }

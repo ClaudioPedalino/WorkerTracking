@@ -27,7 +27,7 @@ namespace WorkerTracking.Api.Controllers
                 });
             }
 
-            var authResponse = await _identityService.RegisterAsync(request.Email, request.Password);
+            var authResponse = await _identityService.RegisterAsync(request);
 
             if (!authResponse.Success)
             {
@@ -60,6 +60,14 @@ namespace WorkerTracking.Api.Controllers
             {
                 Token = authResponse.Token
             });
+        }
+
+        [HttpGet(Routes.Identity.Verify)]
+        public async Task<IActionResult> VerifyExistingEmail([FromQuery] UserLoginCommand request)
+        {
+            var existingUser = await _identityService.VerifyExistingEmailAsync(request.Email);
+
+            return Ok(existingUser);
         }
     }
 }
