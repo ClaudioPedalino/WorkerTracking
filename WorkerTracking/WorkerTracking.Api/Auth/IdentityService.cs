@@ -68,11 +68,10 @@ namespace WorkerTracking.Api.Auth
                 };
             }
 
-            var newUser = new User
+            var newUser = new User(ValidateIsAdmin(request))
             {
                 Email = request.Email,
                 UserName = request.Email,
-                IsAdmin = ValidateIsAdmin(request)
             };
 
             var createdUser = await _userManager.CreateAsync(newUser, request.Password);

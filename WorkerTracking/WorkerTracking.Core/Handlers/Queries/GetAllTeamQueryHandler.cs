@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using WorkerTracking.Core.Exceptions;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 using WorkerTracking.Data.Interfaces;
@@ -19,7 +19,8 @@ namespace WorkerTracking.Core.Handlers
         private readonly IWorkersByTeamRepository _workersByTeamRepository;
 
         public GetAllTeamQueryHandler(ITeamRepository teamRepository,
-                                      IWorkersByTeamRepository workersByTeamRepository, IUserStore<User> userStore)
+                                      IWorkersByTeamRepository workersByTeamRepository,
+                                      IUserStore<User> userStore)
         {
             _teamRepository = teamRepository ?? throw new System.ArgumentNullException(nameof(teamRepository));
             _workersByTeamRepository = workersByTeamRepository ?? throw new System.ArgumentNullException(nameof(workersByTeamRepository));
@@ -29,8 +30,7 @@ namespace WorkerTracking.Core.Handlers
         public async Task<List<TeamModel>> Handle(GetAllTeamQuery request, CancellationToken cancellationToken)
         {
             var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
-            if (user == null) throw new ArgumentNullException("User does not exists");
-            if (user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
+            if (user == null) throw new UserDoesNotExistException();
 
             var teamsDb = await _teamRepository.GetAllTeamsAsync();
             var teamsByWorkerDb = await _workersByTeamRepository.GetTotalWorkersByTeam();

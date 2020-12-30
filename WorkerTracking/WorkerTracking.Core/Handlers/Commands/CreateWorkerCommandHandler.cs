@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Commands.Base;
 using WorkerTracking.Core.Enums;
+using WorkerTracking.Core.Exceptions;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
 
@@ -18,34 +19,32 @@ namespace WorkerTracking.Core.Handlers
         private readonly ITeamRepository _teamRepository;
         private readonly IWorkersByTeamRepository _workersByTeamRepository;
 
-        public CreateWorkerCommandHandler(IWorkerRepository workerRepository, IWorkersByTeamRepository workersByTeamRepository, ITeamRepository teamRepository)
+        public CreateWorkerCommandHandler(IWorkerRepository workerRepository, IWorkersByTeamRepository workersByTeamRepository, ITeamRepository teamRepository, IUserStore<User> userStore)
         {
             _workerRepository = workerRepository;
             _workersByTeamRepository = workersByTeamRepository;
             _teamRepository = teamRepository;
+            this.userStore = userStore;
         }
 
         public async Task<BaseCommandResponse> Handle(CreateWorkerCommand request, CancellationToken cancellationToken)
         {
             var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
-            if (user == null) throw new ArgumentNullException("User does not exists");
-            if (user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
+            if (user == null) throw new UserDoesNotExistException();
+            if (!user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
 
             var validRole = RolesEnum.IsDefined(typeof(RolesEnum), request.RoleId);
             if (!validRole)
-                return new BaseCommandResponse("That role does not exist");
+                return new BaseCommandResponse(new InfoMessage("That role does not exist"));
 
-            var newWorker = new Worker()
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Email = request.Email,
-                Birthday = request.Birthday,
-                PhotoUrl = request.PhotoUrl,
-                StatusId = (int)StatusEnum.Inactive,
-                RoleId = request.RoleId,
-                LastModificationTime = DateTime.Now
-            };
+            var newWorker = new Worker(request.FirstName,
+                                       request.LastName,
+                                       request.Email,
+                                       request.Birthday,
+                                       request.PhotoUrl,
+                                       (int)StatusEnum.Inactive,
+                                       request.RoleId,
+                                       DateTime.Now);
 
             await _workerRepository.CreateWorkerAsync(newWorker);
 
@@ -56,7 +55,7 @@ namespace WorkerTracking.Core.Handlers
                 {
                     var team = await _teamRepository.GetTeamByIdAsync(teamId);
                     if (team == null)
-                        return new BaseCommandResponse("That team does not exist");
+                        return new BaseCommandResponse(new InfoMessage("That team does not exist"));
 
                     var newWorkerByTeam = new WorkersByTeam(newWorker.WorkerId, team.TeamId);
                     teamsName += String.Concat(team.Name, ", ");

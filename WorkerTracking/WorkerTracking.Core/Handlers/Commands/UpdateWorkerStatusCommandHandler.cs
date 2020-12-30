@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Commands.Base;
+using WorkerTracking.Core.Exceptions;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
 
@@ -26,16 +27,16 @@ namespace WorkerTracking.Core.Handlers
         public async Task<BaseCommandResponse> Handle(UpdateWorkerStatusCommand request, CancellationToken cancellationToken)
         {
             var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
-            if (user == null) throw new ArgumentNullException("User does not exists");
-            if (user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
+            if (user == null) throw new UserDoesNotExistException();
+            if (!user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
 
             var workerToUpdate = await _workerRepository.GetWorkerByIdAsync(request.WorkerId);
             if (workerToUpdate == null)
-                return new BaseCommandResponse("Worker does not exist");
+                return new BaseCommandResponse(new InfoMessage("Worker does not exist"));
 
             var newStatus = await _statusRepository.GetStatusByIdAsync(request.StatusId);
             if (newStatus == null)
-                return new BaseCommandResponse("Status does not exist");
+                return new BaseCommandResponse(new InfoMessage("Status does not exist"));
 
             await _workerRepository.UpdateWorkerStatusAsync(workerToUpdate.WorkerId, newStatus.StatusId);
 

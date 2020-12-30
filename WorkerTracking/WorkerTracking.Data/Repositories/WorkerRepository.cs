@@ -44,8 +44,8 @@ namespace WorkerTracking.Data.Repositories
             var workerDb = _context.Workers
                                    .FirstOrDefault(x => x.WorkerId == workerId);
 
-            workerDb.StatusId = statusId;
-            workerDb.LastModificationTime = DateTime.Now;
+            workerDb.SetStatusId(statusId);
+            workerDb.SetLastModificationTime(DateTime.Now);
             _context.Update(workerDb);
             await _context.SaveChangesAsync();
         }

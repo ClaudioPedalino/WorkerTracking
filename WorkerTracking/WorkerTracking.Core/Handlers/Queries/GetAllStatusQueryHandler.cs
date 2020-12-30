@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using WorkerTracking.Core.Exceptions;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 using WorkerTracking.Data.Interfaces;
@@ -29,8 +29,7 @@ namespace WorkerTracking.Core.Handlers
         public async Task<List<StatusModel>> Handle(GetAllStatusQuery request, CancellationToken cancellationToken)
         {
             var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
-            if (user == null) throw new ArgumentNullException("User does not exists");
-            if (user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
+            if (user == null) throw new UserDoesNotExistException();
 
             var statusDb = await _statusRepository.GetAllStatusAsync();
             var workersDb = await _workerRepository.GetAllWorkersAsync();

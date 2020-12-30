@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
+using WorkerTracking.Core.Exceptions;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Queries;
 using WorkerTracking.Data.Interfaces;
@@ -24,7 +24,7 @@ namespace WorkerTracking.Core.Handlers
         public async Task<WorkerModel> Handle(GetWorkerByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
-            if (user == null) throw new ArgumentNullException("User does not exists");
+            if (user == null) throw new UserDoesNotExistException();
 
             var workerDb = await _workerRepository.GetWorkerByIdAsync(request.WorkerId);
 
@@ -40,7 +40,7 @@ namespace WorkerTracking.Core.Handlers
                 StatusId = workerDb.Status.StatusId,
                 Role = workerDb.Role.Name,
                 RoleId = workerDb.Role.RoleId,
-                LastModificationTime = workerDb.LastModificationTime,
+                LastModificationTime = workerDb.GetLastModificationTime(),
                 //IsBirthdayToday = VerifyBirthday(DateTime.Now, workerDb.Birthday),
                 //Teams = workerDb.WorkersByTeamId.Select(x => new TeamModel(x.Team.TeamId, x.Team.Name)).ToList()
             };

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using WorkerTracking.Core.Exceptions;
 using WorkerTracking.Core.Handlers.Models;
 using WorkerTracking.Core.Helpers;
 using WorkerTracking.Core.Queries;
@@ -28,7 +29,7 @@ namespace WorkerTracking.Core.Handlers
         public async Task<Tuple<IEnumerable<WorkerModel>, int>> Handle(GetAllWorkersQuery request, CancellationToken cancellationToken)
         {
             var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
-            if (user == null) throw new ArgumentNullException("User does not exists");
+            if (user == null) throw new UserDoesNotExistException();
 
             var workersByTeamDb = await _workersByTeamRepository.GetAllWorkersWithTeamInfo();
 
@@ -43,11 +44,11 @@ namespace WorkerTracking.Core.Handlers
                                         Email = item.Email,
                                         Birthday = item.Birthday,
                                         PhotoUrl = item.PhotoUrl,
-                                        StatusId = item.StatusId,
+                                        StatusId = item.GetStatusId(),
                                         Status = item.Status.Name,
                                         RoleId = item.RoleId,
                                         Role = item.Role.Name,
-                                        LastModificationTime = item.LastModificationTime,
+                                        LastModificationTime = item.GetLastModificationTime(),
                                         IsBirthdayToday = VerifyBirthday(DateTime.Now, item.Birthday),
                                         Teams = workersByTeamDb.Where(x => x.WorkerId == item.WorkerId)
                                                                .Select(x => new TeamModel(x.Team.TeamId, x.Team.Name))

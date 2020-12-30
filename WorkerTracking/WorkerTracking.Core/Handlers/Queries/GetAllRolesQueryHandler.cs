@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -29,8 +28,7 @@ namespace WorkerTracking.Core.Handlers
         public async Task<List<RoleModel>> Handle(GetAllRolesQuery request, CancellationToken cancellationToken)
         {
             var user = await userStore.FindByIdAsync(request.GetUser(), cancellationToken);
-            if (user == null) throw new ArgumentNullException("User does not exists");
-            if (user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
+            if (user == null) throw new Exceptions.UserDoesNotExistException();
 
             var roleDb = await _roleRepository.GetAllRolesAsync();
             var workersDb = await _workerRepository.GetAllWorkersAsync();

@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
 using System.Threading.Tasks;
+using WorkerTracking.Api.Auth;
 using WorkerTracking.Api.Common;
 using WorkerTracking.Core.Commands;
 using WorkerTracking.Core.Common;
@@ -27,12 +29,14 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
-        [Authorize]
+        //[Authorize]
+        [EnableCors("WorkerApiCors")]
         [HttpGet(Routes.Get_All_Workers)]
         public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkersQuery request)
         {
             try
             {
+                request.SetUser(User.GetUserId());
                 var response = await _mediator.Send(request);
 
                 return Ok(new PagedResponse<WorkerModel>(
@@ -55,6 +59,7 @@ namespace WorkerTracking.Api.Controllers
         {
             try
             {
+                request.SetUser(User.GetUserId());
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }
@@ -71,6 +76,7 @@ namespace WorkerTracking.Api.Controllers
         {
             try
             {
+                request.SetUser(User.GetUserId());
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }
@@ -87,6 +93,7 @@ namespace WorkerTracking.Api.Controllers
         {
             try
             {
+                request.SetUser(User.GetUserId());
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }

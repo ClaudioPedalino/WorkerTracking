@@ -39,7 +39,7 @@ namespace WorkerTracking.Data.EntityConfigurations
             builder.Property(x => x.PhotoUrl)
                 .HasAnnotation("Relational:ColumnName", "PhotoUrl");
 
-            builder.Property(x => x.StatusId)
+            builder.Property(x => x.GetStatusId())
                 .HasAnnotation("Relational:ColumnName", "StatusId");
 
             builder.Property(x => x.RoleId)
@@ -52,7 +52,7 @@ namespace WorkerTracking.Data.EntityConfigurations
 
             builder.HasOne(x => x.Status)
                 .WithMany()
-                .HasForeignKey(x => x.StatusId);
+                .HasForeignKey(x => x.GetStatusId());
 
             builder.HasOne(x => x.Role)
                 .WithMany()

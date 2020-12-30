@@ -41,6 +41,6 @@ namespace WorkerTracking.Data.Repositories
 
         public async Task<bool> IsBeingUsed(Status entity)
             => await _context.Workers
-                             .AnyAsync(x => x.StatusId == entity.StatusId);
+                             .AnyAsync(x => x.GetStatusId() == entity.StatusId);
     }
 }

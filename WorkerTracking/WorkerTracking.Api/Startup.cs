@@ -36,6 +36,15 @@ namespace WorkerTracking.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(c =>
+            {
+                c.AddPolicy(name: "WorkerApiCors", options =>
+                    options
+                        .WithOrigins("http://localhost:4200", "http://localhost:4200/dashboard")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
+
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateRoleCommand>());
 
@@ -75,12 +84,7 @@ namespace WorkerTracking.Api
             RegisterLogging(services);
             RegisterSwagger(services);
 
-            services.AddCors(c =>
-            {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()
-                                                             .AllowAnyHeader()
-                                                             .AllowAnyMethod());
-            });
+
 
             #region TODO: fix health check
             //services.AddHealthChecks()
@@ -173,12 +177,9 @@ namespace WorkerTracking.Api
 
             app.UseRouting();
 
+            app.UseCors("WorkerApiCors");
+
             app.UseAuthorization();
-
-            app.UseCors(options => options.AllowAnyOrigin()
-                                          .AllowAnyHeader()
-                                          .AllowAnyMethod());
-
 
             app.UseEndpoints(endpoints =>
             {
@@ -214,9 +215,6 @@ namespace WorkerTracking.Api
             //});
 
             //app.UseHealthChecksUI();
-
-
-
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
