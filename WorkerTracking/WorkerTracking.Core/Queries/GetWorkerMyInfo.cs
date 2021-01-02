@@ -5,8 +5,7 @@ using WorkerTracking.Core.Identity;
 
 namespace WorkerTracking.Core.Queries
 {
-    public class GetWorkerByIdQuery : LoggedRequest, IRequest<WorkerModel>
+    public class GetWorkerMyInfo : LoggedRequest, IRequest<WorkerModel>
     {
-        public Guid WorkerId { get; set; }
     }
 }

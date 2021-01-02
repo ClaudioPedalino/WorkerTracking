@@ -11,5 +11,6 @@ namespace WorkerTracking.Data.Interfaces
         Task CreateRoleAsync(Role entity);
         Task DeleteRoleAsync(Role entity);
         Task<bool> IsBeingUsed(Role entity);
+        Task<Role> GetDefaultRole();
     }
 }

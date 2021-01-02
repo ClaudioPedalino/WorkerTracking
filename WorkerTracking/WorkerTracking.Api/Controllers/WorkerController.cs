@@ -29,8 +29,9 @@ namespace WorkerTracking.Api.Controllers
             _logger = logger;
         }
 
-        //[Authorize]
-        [EnableCors("WorkerApiCors")]
+        [Authorize]
+        //[AllowAnonymous]
+        //[EnableCors("WorkerApiCors")]
         [HttpGet(Routes.Get_All_Workers)]
         public async Task<ActionResult<WorkerModel>> GetAllWorkersAsync([FromQuery] GetAllWorkersQuery request)
         {
@@ -54,8 +55,8 @@ namespace WorkerTracking.Api.Controllers
         }
 
         [Authorize]
-        [HttpGet(Routes.Get_Worker_By_Id)]
-        public async Task<ActionResult<WorkerModel>> GetWorkerByIdAsync([FromQuery] GetWorkerByIdQuery request)
+        [HttpGet(Routes.Get_Worker_My_Info)]
+        public async Task<ActionResult<WorkerModel>> GetWorkerByIdAsync([FromQuery] GetWorkerMyInfo request)
         {
             try
             {

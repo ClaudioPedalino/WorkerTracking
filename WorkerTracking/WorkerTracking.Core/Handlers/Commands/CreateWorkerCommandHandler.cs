@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkerTracking.Core.Commands;
@@ -18,13 +19,17 @@ namespace WorkerTracking.Core.Handlers
         private readonly IWorkerRepository _workerRepository;
         private readonly ITeamRepository _teamRepository;
         private readonly IWorkersByTeamRepository _workersByTeamRepository;
+        private readonly IStatusRepository _statusRepository;
+        private readonly IRoleRepository _roleRepository;
 
-        public CreateWorkerCommandHandler(IWorkerRepository workerRepository, IWorkersByTeamRepository workersByTeamRepository, ITeamRepository teamRepository, IUserStore<User> userStore)
+        public CreateWorkerCommandHandler(IWorkerRepository workerRepository, IWorkersByTeamRepository workersByTeamRepository, ITeamRepository teamRepository, IUserStore<User> userStore, IStatusRepository statusRepository, IRoleRepository roleRepository)
         {
             _workerRepository = workerRepository;
             _workersByTeamRepository = workersByTeamRepository;
             _teamRepository = teamRepository;
             this.userStore = userStore;
+            _statusRepository = statusRepository;
+            _roleRepository = roleRepository;
         }
 
         public async Task<BaseCommandResponse> Handle(CreateWorkerCommand request, CancellationToken cancellationToken)
@@ -33,19 +38,31 @@ namespace WorkerTracking.Core.Handlers
             if (user == null) throw new UserDoesNotExistException();
             if (!user.IsAdmin) throw new UnauthorizedAccessException("User does not have permission for that action");
 
-            var validRole = RolesEnum.IsDefined(typeof(RolesEnum), request.RoleId);
-            if (!validRole)
-                return new BaseCommandResponse(new InfoMessage("That role does not exist"));
+            var roleToAdd = await _roleRepository.GetRoleByIdAsync(request.RoleId);
+            var roleId = roleToAdd != null ? roleToAdd.RoleId : (int)RolesEnum.NotAssigned;
+
+            var validUser = await userStore.FindByNameAsync(request.Email.ToUpper(), cancellationToken);
+            if (validUser != null)
+                return new BaseCommandResponse(new InfoMessage("There is already an user registered with that email"));
+
+            //var validRole = RolesEnum.IsDefined(typeof(RolesEnum), request.RoleId);
+            //if (!validRole)
+            //    return new BaseCommandResponse(new InfoMessage("That role does not exist"));
+            //var defaultStatus = await _statusRepository.GetDefaultStatus();
 
             var newWorker = new Worker(request.FirstName,
                                        request.LastName,
                                        request.Email,
                                        request.Birthday,
-                                       request.PhotoUrl,
+                                       !string.IsNullOrWhiteSpace(request.PhotoUrl)
+                                        ? request.PhotoUrl
+                                        : "",
                                        (int)StatusEnum.Inactive,
-                                       request.RoleId,
+                                       roleId,
                                        DateTime.Now);
 
+            //newWorker.Status = defaultStatus;
+            //newWorker.Role = roleToAdd;
             await _workerRepository.CreateWorkerAsync(newWorker);
 
             string teamsName = "";
@@ -62,6 +79,7 @@ namespace WorkerTracking.Core.Handlers
                     await _workersByTeamRepository.CreateWorkerByTeam(newWorkerByTeam);
                 }
             }
+
 
             return new BaseCommandResponse($"Worker {newWorker.FirstName} {newWorker.LastName} created succesfully into teams: {teamsName.Remove(teamsName.Length - 2)}");
         }

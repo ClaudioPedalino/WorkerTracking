@@ -32,6 +32,12 @@ namespace WorkerTracking.Data.Repositories
                 .Include(x => x.Status)
                 .Include(x => x.Role)
                 .FirstOrDefaultAsync();
+        public async Task<Worker> GetWorkerByUserNameAsync(string userName)
+            => await _context.Workers
+                .Where(x => x.Email.ToUpper() == userName.ToUpper())
+                .Include(x => x.Status)
+                .Include(x => x.Role)
+                .FirstOrDefaultAsync();
 
         public async Task CreateWorkerAsync(Worker entity)
         {
@@ -44,8 +50,8 @@ namespace WorkerTracking.Data.Repositories
             var workerDb = _context.Workers
                                    .FirstOrDefault(x => x.WorkerId == workerId);
 
-            workerDb.SetStatusId(statusId);
-            workerDb.SetLastModificationTime(DateTime.Now);
+            workerDb.StatusId = statusId;
+            workerDb.LastModificationTime = DateTime.Now;
             _context.Update(workerDb);
             await _context.SaveChangesAsync();
         }

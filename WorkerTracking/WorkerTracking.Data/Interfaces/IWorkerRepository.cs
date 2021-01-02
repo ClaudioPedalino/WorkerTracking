@@ -11,5 +11,6 @@ namespace WorkerTracking.Data.Interfaces
         Task<Worker> GetWorkerByIdAsync(Guid WorkerId);
         Task CreateWorkerAsync(Worker entity);
         Task UpdateWorkerStatusAsync(Guid workerId, int statusId);
+        Task<Worker> GetWorkerByUserNameAsync(string userName);
     }
 }

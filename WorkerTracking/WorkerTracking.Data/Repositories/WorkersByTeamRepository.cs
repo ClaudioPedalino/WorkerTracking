@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +24,16 @@ namespace WorkerTracking.Data.Repositories
                    .Include(x => x.Worker)
                    .Include(x => x.Worker.Status)
                    .Include(x => x.Worker.Role)
+                   .ToListAsync();
+            return result;
+        }
+
+        public async Task<IEnumerable<WorkersByTeam>> GetWorkerTeamInfo(Guid workerId)
+        {
+            var result = await _context.WorkersByTeams
+                   .Where(x => x.WorkerId == workerId)
+                   .Include(x => x.Team)
+                   .Include(x => x.Worker)
                    .ToListAsync();
             return result;
         }

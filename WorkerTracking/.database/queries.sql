@@ -1,9 +1,17 @@
+SELECT is_admin, * FROM users
+-- update users set is_admin = true where user_name = 'clau@gmail.com' 
 SELECT * FROM status
 SELECT * FROM roles
 SELECT * FROM teams
 SELECT * FROM workers 
 SELECT * FROM workers_by_teams
 SELECT * FROM logs order by TIMESTAMP
+
+SELECT * FROM workers order by last_modification_time desc
+
+
+SELECT * 
+FROM workers_by_teams
 
 /*-- Listar tablas --------------------*/
     SELECT table_catalog, table_name
@@ -14,7 +22,7 @@ SELECT * FROM logs order by TIMESTAMP
     SELECT table_name, column_name, column_default, is_nullable, data_type,character_maximum_length
     FROM information_schema.columns
     WHERE table_schema = 'public'
-    AND table_name   = 'workers'
+    AND table_name = 'workers'
 
 /*-- Randomizar los valores de los satusId entre 100 y 104 ----------------*/
     UPDATE workers

@@ -2,6 +2,7 @@
 {
     public enum RolesEnum
     {
+        NotAssigned = 6000,
         ProductOwner = 5001,
         ProjectManager = 5002,
         TeamLeader = 5003,

@@ -17,7 +17,7 @@
 
         #region Worker-Controller
         public const string Get_All_Workers = "get-all";
-        public const string Get_Worker_By_Id = "get-by-id";
+        public const string Get_Worker_My_Info = "get-my-info";
         public const string Create_Worker = "create-worker";
         public const string Update_Worker_Status = "update-status";
         public const string Delete_Worker = "delete-worker";

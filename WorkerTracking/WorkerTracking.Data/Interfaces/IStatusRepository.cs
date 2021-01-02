@@ -11,5 +11,6 @@ namespace WorkerTracking.Data.Interfaces
         Task CreateStatusAsync(Status entity);
         Task DeleteStatusAsync(Status entity);
         Task<bool> IsBeingUsed(Status entity);
+        Task<Status> GetDefaultStatus();
     }
 }

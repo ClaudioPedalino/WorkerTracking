@@ -44,11 +44,11 @@ namespace WorkerTracking.Core.Handlers
                                         Email = item.Email,
                                         Birthday = item.Birthday,
                                         PhotoUrl = item.PhotoUrl,
-                                        StatusId = item.GetStatusId(),
+                                        StatusId = item.StatusId,
                                         Status = item.Status.Name,
                                         RoleId = item.RoleId,
                                         Role = item.Role.Name,
-                                        LastModificationTime = item.GetLastModificationTime(),
+                                        LastModificationTime = item.LastModificationTime,
                                         IsBirthdayToday = VerifyBirthday(DateTime.Now, item.Birthday),
                                         Teams = workersByTeamDb.Where(x => x.WorkerId == item.WorkerId)
                                                                .Select(x => new TeamModel(x.Team.TeamId, x.Team.Name))

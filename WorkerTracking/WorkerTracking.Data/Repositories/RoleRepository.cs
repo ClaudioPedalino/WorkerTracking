@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkerTracking.Core.Enums;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
 
@@ -24,6 +25,13 @@ namespace WorkerTracking.Data.Repositories
         public async Task<Role> GetRoleByIdAsync(int RoleId)
             => await _context.Roles
                 .FirstOrDefaultAsync(x => x.RoleId == RoleId);
+
+        public async Task<Role> GetDefaultRole()
+        {
+            var defaultValue = await _context.Roles.FirstOrDefaultAsync(x => x.Name.Replace(" ","") == RolesEnum.NotAssigned.ToString());
+            _context.Entry(defaultValue).State = EntityState.Detached;
+            return defaultValue;
+        }
 
         public async Task CreateRoleAsync(Role entity)
         {

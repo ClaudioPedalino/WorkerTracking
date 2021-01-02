@@ -92,7 +92,7 @@ namespace WorkerTracking.Api.Auth
             => request.AdminKey != null
                 && _configuration.GetValue<string>("AdminKey").Equals(request.AdminKey);
 
-        private AuthenticationResult GenerateAuthResult(IdentityUser user)
+        private AuthenticationResult GenerateAuthResult(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
@@ -100,10 +100,12 @@ namespace WorkerTracking.Api.Auth
             {
                 Subject = new ClaimsIdentity(new[]
                 {
+                    new Claim("id", user.Id),
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim("id", user.Id),
+                    new Claim(JwtRegisteredClaimNames.AuthTime, DateTime.Now.ToString("f")),
+                    new Claim("admin", user.IsAdmin.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(8),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),

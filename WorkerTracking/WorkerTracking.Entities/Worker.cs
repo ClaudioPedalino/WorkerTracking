@@ -4,16 +4,18 @@ namespace WorkerTracking.Entities
 {
     public class Worker
     {
-        public Worker(string firstName, string lastName, string email, DateTime birthday, string photoUrl, int statusId, int roleId, DateTime lastModificationTime)
+        public Worker(string firstName, string lastName, string email, DateTime birthday, string photoUrl, 
+            int statusId, int roleId, DateTime lastModificationTime)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Birthday = birthday;
             PhotoUrl = photoUrl;
-            SetStatusId(statusId);
+            StatusId = statusId;
             RoleId = roleId;
-            SetLastModificationTime(lastModificationTime);
+            LastModificationTime = lastModificationTime;
+            IsActive = true;
         }
 
 
@@ -23,22 +25,13 @@ namespace WorkerTracking.Entities
         public string Email { get; private set; }
         public DateTime Birthday { get; private set; }
         public string PhotoUrl { get; private set; }
-
-
-        private int statusId;
-        public int GetStatusId() => statusId;
-        public void SetStatusId(int value) => statusId = value;
-
+        public int StatusId { get; set; }
         public int RoleId { get; private set; }
-
-        private DateTime lastModificationTime;
-        public DateTime GetLastModificationTime() => lastModificationTime;
-        public void SetLastModificationTime(DateTime value) => lastModificationTime = value;
-
+        public DateTime LastModificationTime { get; set; }
         public bool IsActive { get; private set; }
 
-        public virtual Status Status { get; private set; }
-        public virtual Role Role { get; private set; }
+        public virtual Status Status { get; set; }
+        public virtual Role Role { get; set; }
 
 
     }

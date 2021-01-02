@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkerTracking.Core.Enums;
 using WorkerTracking.Data.Interfaces;
 using WorkerTracking.Entities;
 
@@ -27,6 +28,13 @@ namespace WorkerTracking.Data.Repositories
                 .Where(x => x.StatusId == statusId)
                 .FirstOrDefaultAsync();
 
+        public async Task<Status> GetDefaultStatus()
+        {
+            var defaultValue = await _context.Status.FirstOrDefaultAsync(x => x.Name == StatusEnum.Inactive.ToString());
+            _context.Entry(defaultValue).State = EntityState.Detached;
+            return defaultValue;
+        }
+
         public async Task CreateStatusAsync(Status entity)
         {
             await _context.Status.AddAsync(entity);
@@ -41,6 +49,6 @@ namespace WorkerTracking.Data.Repositories
 
         public async Task<bool> IsBeingUsed(Status entity)
             => await _context.Workers
-                             .AnyAsync(x => x.GetStatusId() == entity.StatusId);
+                             .AnyAsync(x => x.StatusId == entity.StatusId);
     }
 }

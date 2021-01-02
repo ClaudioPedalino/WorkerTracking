@@ -49,6 +49,7 @@ namespace WorkerTracking.Data
 
             modelBuilder.Entity<Role>().HasData(new Role[]
             {
+                new Role ((int)RolesEnum.NotAssigned, "Not Assigned", "_NA"),
                 new Role ((int)RolesEnum.ProductOwner, "Product Owner", "PO"),
                 new Role ((int)RolesEnum.ProjectManager, "Project Manager", "PM"),
                 new Role ((int)RolesEnum.TeamLeader, "Team Leader", "TL"),

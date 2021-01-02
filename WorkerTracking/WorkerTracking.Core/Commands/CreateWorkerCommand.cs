@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using WorkerTracking.Core.Commands.Base;
@@ -40,17 +41,6 @@ namespace WorkerTracking.Core.Commands
                 .NotNull().WithMessage("{PropertyName} can not be null")
                 .NotEmpty().WithMessage("{PropertyName} can not be empty")
                 .EmailAddress();
-
-            RuleFor(x => x.FirstName)
-                .Cascade(CascadeMode.Stop)
-                .NotNull().WithMessage("{PropertyName} can not be null")
-                .NotEmpty().WithMessage("{PropertyName} can not be empty")
-                .MaximumLength(30).WithMessage("{PropertyName} can not be more than 30 characters");
-
-            RuleFor(x => x.RoleId)
-                .Cascade(CascadeMode.Stop)
-                .NotNull().WithMessage("{PropertyName} can not be null")
-                .NotEmpty().WithMessage("{PropertyName} can not be empty");
 
         }
     }
